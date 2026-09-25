@@ -1,10 +1,5 @@
 [
   {
-    "question": "What is the main finding of the paper 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study'?",
-    "answer": "The main finding of the paper \"JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study\" is that the JADE-Plus system achieved the highest diagnostic performance in assessing jawbone lesions, with a Top-1 accuracy of 90% and a Top-3 accuracy of 100%. The study demonstrated that JADE-Plus outperformed other models, including JADE, GPT-5.4, and ORAD, in terms of diagnostic accuracy, with no missed diagnoses in the evaluated cases."
-  },
-  {
-    "question": "Who authored the paper 'Retrieval-Augmented Large Language Model Agents for Automated Scientific Literature Review Generation'?",
-    "answer": "The paper titled \"Retrieval-Augmented Large Language Model Agents for Automated Scientific Literature Review Generation\" was authored by Ruotong Wang, Nyutian Long, Shunqi Liu, Yuxi Wang, Zhen Qi, and Huajun Zhang."
+    "error": "Agent demo skipped: GOOGLE_API_KEY is required when LLM_PROVIDER=gemini."
   }
 ]

@@ -1,6 +1,6 @@
 # Phase 1 Report - Baseline Pipeline
 
-_Generated at 2026-09-25T09:13:36.499481+00:00_
+_Generated at 2026-09-25T10:02:17.966802+00:00_
 
 ## Source
 
@@ -10,12 +10,12 @@ _Generated at 2026-09-25T09:13:36.499481+00:00_
 | source_query | agentic retrieval augmented generation large language model |
 | source_filter | from-pub-date:2026-03-29,has-abstract:true |
 | source_mode | raw_snapshot |
-| run_date | 2026-09-25T09:13:16.849764+00:00 |
+| run_date | 2026-09-25T09:58:05.196096+00:00 |
 | raw_records | 24 |
 | clean_rows | 24 |
 | collection_name | papers-baseline |
 | embedding_model | sentence-transformers/all-MiniLM-L6-v2 |
-| llm_provider | openai |
+| llm_provider | gemini |
 | test_set_size | 10 |
 
 ## Evaluation Metrics

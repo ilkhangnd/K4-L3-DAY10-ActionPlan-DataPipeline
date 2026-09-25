@@ -1,17 +1,17 @@
 {
-  "report_name": "baseline",
-  "generated_at": "2026-09-25T09:58:05.479469+00:00",
-  "success": true,
-  "gx_success": true,
+  "report_name": "corrupted",
+  "generated_at": "2026-09-25T10:03:38.412174+00:00",
+  "success": false,
+  "gx_success": false,
   "freshness": {
-    "latest_published": "2026-09-15",
-    "oldest_published": "2026-04-01",
-    "stale_rows": 0,
-    "total_rows": 24,
-    "stale_ratio": 0.0,
+    "latest_published": "2026-08-25",
+    "oldest_published": "2025-04-06",
+    "stale_rows": 11,
+    "total_rows": 22,
+    "stale_ratio": 0.5,
     "freshness_threshold_days": 180,
     "max_stale_ratio": 0.25,
-    "is_fresh": true
+    "is_fresh": false
   },
   "expectations": [
     {
@@ -27,7 +27,7 @@
         "severity": "critical"
       },
       "result": {
-        "observed_value": 24
+        "observed_value": 22
       },
       "meta": {},
       "exception_info": {
@@ -48,7 +48,7 @@
         "severity": "critical"
       },
       "result": {
-        "element_count": 24,
+        "element_count": 22,
         "unexpected_count": 0,
         "unexpected_percent": 0.0,
         "partial_unexpected_list": [],
@@ -74,7 +74,7 @@
         "severity": "critical"
       },
       "result": {
-        "element_count": 24,
+        "element_count": 22,
         "unexpected_count": 0,
         "unexpected_percent": 0.0,
         "partial_unexpected_list": [],
@@ -100,7 +100,7 @@
         "severity": "critical"
       },
       "result": {
-        "element_count": 24,
+        "element_count": 22,
         "unexpected_count": 0,
         "unexpected_percent": 0.0,
         "partial_unexpected_list": [],
@@ -115,7 +115,7 @@
       }
     },
     {
-      "success": true,
+      "success": false,
       "expectation_config": {
         "type": "expect_column_values_to_be_unique",
         "kwargs": {
@@ -126,16 +126,43 @@
         "severity": "critical"
       },
       "result": {
-        "element_count": 24,
-        "unexpected_count": 0,
-        "unexpected_percent": 0.0,
-        "partial_unexpected_list": [],
+        "element_count": 22,
+        "unexpected_count": 6,
+        "unexpected_percent": 27.27272727272727,
+        "partial_unexpected_list": [
+          "10.1007/s10278-026-02086-9",
+          "10.20944/preprints202604.0339.v1",
+          "10.20944/preprints202608.1849.v1",
+          "10.1007/s10278-026-02086-9",
+          "10.20944/preprints202604.0339.v1",
+          "10.20944/preprints202608.1849.v1"
+        ],
         "missing_count": 0,
         "missing_percent": 0.0,
-        "unexpected_percent_total": 0.0,
-        "unexpected_percent_nonmissing": 0.0,
-        "partial_unexpected_counts": [],
-        "partial_unexpected_index_list": []
+        "unexpected_percent_total": 27.27272727272727,
+        "unexpected_percent_nonmissing": 27.27272727272727,
+        "partial_unexpected_counts": [
+          {
+            "value": "10.1007/s10278-026-02086-9",
+            "count": 2
+          },
+          {
+            "value": "10.20944/preprints202604.0339.v1",
+            "count": 2
+          },
+          {
+            "value": "10.20944/preprints202608.1849.v1",
+            "count": 2
+          }
+        ],
+        "partial_unexpected_index_list": [
+          0,
+          1,
+          2,
+          19,
+          20,
+          21
+        ]
       },
       "meta": {},
       "exception_info": {
@@ -145,7 +172,7 @@
       }
     },
     {
-      "success": true,
+      "success": false,
       "expectation_config": {
         "type": "expect_column_value_lengths_to_be_between",
         "kwargs": {
@@ -157,16 +184,35 @@
         "severity": "critical"
       },
       "result": {
-        "element_count": 24,
-        "unexpected_count": 0,
-        "unexpected_percent": 0.0,
-        "partial_unexpected_list": [],
+        "element_count": 22,
+        "unexpected_count": 6,
+        "unexpected_percent": 27.27272727272727,
+        "partial_unexpected_list": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
         "missing_count": 0,
         "missing_percent": 0.0,
-        "unexpected_percent_total": 0.0,
-        "unexpected_percent_nonmissing": 0.0,
-        "partial_unexpected_counts": [],
-        "partial_unexpected_index_list": []
+        "unexpected_percent_total": 27.27272727272727,
+        "unexpected_percent_nonmissing": 27.27272727272727,
+        "partial_unexpected_counts": [
+          {
+            "value": "",
+            "count": 6
+          }
+        ],
+        "partial_unexpected_index_list": [
+          0,
+          1,
+          2,
+          19,
+          20,
+          21
+        ]
       },
       "meta": {},
       "exception_info": {

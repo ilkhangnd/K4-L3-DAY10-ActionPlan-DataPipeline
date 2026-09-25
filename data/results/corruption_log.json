@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-09-25T10:03:38.305903+00:00",
+  "strategy": "deterministic",
+  "original_rows": 24,
+  "final_rows": 22,
+  "scenario_count": 6,
+  "scenarios": [
+    {
+      "corruption_type": "drop_latest_records",
+      "affected_count": 5,
+      "paper_ids": [
+        "10.21203/rs.3.rs-10489777/v1",
+        "10.70267/aitia.2026482489",
+        "10.21203/rs.3.rs-10349437/v1",
+        "10.54254/2755-2721/2026.36624",
+        "10.36887/2415-8453-2026-3-2"
+      ],
+      "parameters": {
+        "fraction": 0.2,
+        "rows_removed": 5
+      }
+    },
+    {
+      "corruption_type": "blank_summary",
+      "affected_count": 3,
+      "paper_ids": [
+        "10.1007/s10278-026-02086-9",
+        "10.20944/preprints202604.0339.v1",
+        "10.20944/preprints202608.1849.v1"
+      ],
+      "parameters": {
+        "replacement": ""
+      }
+    },
+    {
+      "corruption_type": "inject_noise",
+      "affected_count": 3,
+      "paper_ids": [
+        "10.21079/11681/50309",
+        "10.2118/234689-pa",
+        "10.21203/rs.3.rs-10012178/v1"
+      ],
+      "parameters": {
+        "prefix": "CORRUPTED TOKEN STREAM !!! 9f4a zzz invalid payload."
+      }
+    },
+    {
+      "corruption_type": "truncate_title",
+      "affected_count": 3,
+      "paper_ids": [
+        "10.21203/rs.3.rs-10178277/v1",
+        "10.21203/rs.3.rs-10423755/v1",
+        "10.21203/rs.3.rs-9882260/v1"
+      ],
+      "parameters": {
+        "maximum_characters": 7
+      }
+    },
+    {
+      "corruption_type": "stale_date",
+      "affected_count": 8,
+      "paper_ids": [
+        "10.1007/s10278-026-02086-9",
+        "10.20944/preprints202604.0339.v1",
+        "10.20944/preprints202608.1849.v1",
+        "10.21079/11681/50309",
+        "10.2118/234689-pa",
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.21203/rs.3.rs-10178277/v1",
+        "10.21203/rs.3.rs-10423755/v1"
+      ],
+      "parameters": {
+        "days_shifted_back": 365
+      }
+    },
+    {
+      "corruption_type": "duplicate_rows",
+      "affected_count": 3,
+      "paper_ids": [
+        "10.1007/s10278-026-02086-9",
+        "10.20944/preprints202604.0339.v1",
+        "10.20944/preprints202608.1849.v1"
+      ],
+      "parameters": {
+        "rows_added": 3
+      }
+    }
+  ]
+}

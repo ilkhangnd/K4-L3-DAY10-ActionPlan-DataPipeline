@@ -63,6 +63,8 @@ def _quality_report_path(settings: Settings, report_name: str):
         return settings.paths.baseline_quality_report
     if report_name == "corrupted":
         return settings.paths.corrupted_quality_report
+    if report_name == "repaired":
+        return settings.paths.repaired_quality_report
     return settings.paths.quality_dir / f"{report_name}_quality_report.json"
 
 
