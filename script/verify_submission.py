@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Callable
 from pathlib import Path
 import sys
@@ -58,11 +59,9 @@ def _nonempty(path: Path) -> bool:
 
 def _valid_test_set(path: Path) -> bool:
     data = read_json(path)
-    return (
-        isinstance(data, list)
-        and len(data) == 10
-        and {item.get("question_type") for item in data} == {"summary", "authors", "date", "categories"}
-    )
+    expected = {"summary", "authors", "date", "category", "multi_hop"}
+    types = [item.get("question_type") for item in data] if isinstance(data, list) else []
+    return isinstance(data, list) and len(data) == 10 and set(types) == expected and Counter(types) == Counter({kind: 2 for kind in expected})
 
 
 def _valid_metrics(path: Path) -> bool:
@@ -73,7 +72,7 @@ def _valid_metrics(path: Path) -> bool:
 
 def _valid_corruption_log(path: Path) -> bool:
     data = read_json(path)
-    names = tuple(item.get("corruption_type") for item in data.get("scenarios", []))
+    names = tuple(item.get("name") for item in data.get("scenarios", []))
     return data.get("scenario_count") == 6 and names == CORRUPTION_SCENARIOS
 
 

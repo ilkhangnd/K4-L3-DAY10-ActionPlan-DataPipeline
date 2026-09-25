@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 
 import pandas as pd
+from pandas.testing import assert_frame_equal
 
 from core.config import load_settings
 from core.utils import read_json, write_csv, write_json
@@ -48,8 +49,13 @@ def main() -> None:
 
     # Idempotent repair: discard the altered dataframe and rebuild solely from
     # the preserved raw-record artifact, then write to separate repair paths.
+    test_set_before = settings.paths.eval_testset.read_bytes()
+    repair_run_date = datetime.now(UTC)
     repaired_df = build_clean_dataframe(
-        load_raw_records(settings.paths.raw_records_json), datetime.now(UTC)
+        load_raw_records(settings.paths.raw_records_json), repair_run_date
+    )
+    repaired_repeat_df = build_clean_dataframe(
+        load_raw_records(settings.paths.raw_records_json), repair_run_date
     )
     write_csv(repaired_df, settings.paths.repaired_clean_csv)
     write_json(settings.paths.repaired_clean_json, repaired_df.to_dict(orient="records"))
@@ -72,6 +78,16 @@ def main() -> None:
         settings.paths.repaired_answers,
     )
 
+    write_json(
+        settings.paths.repair_verification,
+        {
+            "repair_triggered_by_failed_gate": not bool(corrupted_quality["success"]),
+            "idempotent": _dataframes_match(repaired_df, repaired_repeat_df),
+            "baseline_matches_repaired": _dataframes_match(clean_df, repaired_df),
+            "test_set_unchanged": test_set_before == settings.paths.eval_testset.read_bytes(),
+        },
+    )
+
     generate_corruption_report(
         report_path=settings.paths.comparison_report,
         baseline_metrics=baseline_metrics,
@@ -86,6 +102,15 @@ def main() -> None:
     )
     print("Corruption flow complete: baseline, corrupted, and repaired artifacts are ready.")
     print(f"Comparison report: {settings.paths.comparison_report}")
+
+
+def _dataframes_match(left: pd.DataFrame, right: pd.DataFrame) -> bool:
+    """Return whether two dataframes have the same values and column order."""
+    try:
+        assert_frame_equal(left.reset_index(drop=True), right.reset_index(drop=True), check_dtype=False)
+    except AssertionError:
+        return False
+    return True
 
 
 def _require_baseline_artifacts(settings) -> None:

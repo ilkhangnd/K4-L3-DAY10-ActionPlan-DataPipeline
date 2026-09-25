@@ -1,5 +1,6 @@
 solution/
 .env
+.DS_Store
 lab.txt
 .venv/
 .uv-cache/

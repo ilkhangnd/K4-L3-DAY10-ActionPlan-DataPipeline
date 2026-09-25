@@ -1,7 +1,8 @@
 {
-  "generated_at": "2026-09-25T14:14:15.851126+00:00",
+  "generated_at": "2026-09-25T14:30:58.234734+00:00",
   "input_rows": 24,
   "output_rows": 24,
+  "scenario_count": 6,
   "scenarios": [
     {
       "name": "drop_latest_records",

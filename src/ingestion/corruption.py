@@ -9,6 +9,16 @@ import pandas as pd
 from core.utils import write_json
 
 
+CORRUPTION_SCENARIOS = (
+    "drop_latest_records",
+    "blank_summary",
+    "inject_text_noise",
+    "truncate_title",
+    "stale_date",
+    "duplicate_rows",
+)
+
+
 def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path) -> pd.DataFrame:
     """Apply six deterministic corruption scenarios to a clean dataframe.
 
@@ -69,6 +79,7 @@ def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path) -> pd.DataFrame:
         "generated_at": datetime.now(UTC).isoformat(),
         "input_rows": original_rows,
         "output_rows": len(corrupted),
+        "scenario_count": len(CORRUPTION_SCENARIOS),
         "scenarios": [
             {
                 "name": "drop_latest_records",
