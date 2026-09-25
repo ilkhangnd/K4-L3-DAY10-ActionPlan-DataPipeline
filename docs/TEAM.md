@@ -11,11 +11,9 @@
 | STT | Họ và tên | MSSV | Email | Vai trò & Phân công công việc | Báo cáo cá nhân |
 |---:|---|---|---|---|---|
 | 1 | Nguyễn Đình Khang | 2A202602584 | 26ai.khangnd2@vinuni.edu.vn | **Trưởng nhóm; Pha 2 & phối hợp Pha 6.** Thu thập Crossref, cleaning, GX/freshness; safe repair và đối chiếu ba trạng thái. | [`2A202602584_NguyenDinhKhang.md`](../report/2A202602584_NguyenDinhKhang.md) |
-| 2 | Phạm Hồ Quang Dũng | 2A202602860 | — | **Pha 3.** Benchmark test set, MiniLM embedding, ChromaDB vector index và smoke test retrieval. | [`2A202602860_PhamHoQuangDung.md`](../report/2A202602860_PhamHoQuangDung.md) |
-| 3 | Ngô Gia Quốc | 2A202602757 | — | **Pha 4.** Tích hợp baseline pipeline, baseline evaluation/report và portability khi nạp index. | [`2A202602757_NgoGiaQuoc.md`](../report/2A202602757_NgoGiaQuoc.md) |
+| 2 | Phạm Hồ Quang Dũng | 2A202602860 | 26ai.dungphq@vinuni.edu.vn | **Pha 3.** Benchmark test set, MiniLM embedding, ChromaDB vector index và smoke test retrieval. | [`2A202602860_PhamHoQuangDung.md`](../report/2A202602860_PhamHoQuangDung.md) |
+| 3 | Ngô Gia Quốc | 2A202602757 | 26ai.quocng@vinuni.eu.vn | **Pha 4.** Tích hợp baseline pipeline, baseline evaluation/report và portability khi nạp index. | [`2A202602757_NgoGiaQuoc.md`](../report/2A202602757_NgoGiaQuoc.md) |
 | 4 | Trần Long Khánh | 2A202602538 | — | **Pha 5 & phối hợp Pha 6.** Bộ corruption sáu kịch bản, corruption flow, repair/integration và nghiệm thu báo cáo đối chiếu. | [`2A202602538_TranLongKhanh.md`](../report/2A202602538_TranLongKhanh.md) |
-
-> Email chưa được cung cấp trong các báo cáo cá nhân nên được để là `—`; bổ sung email trường nếu giảng viên yêu cầu.
 
 ---
 
@@ -23,7 +21,7 @@
 
 ### Nguyễn Đình Khang — 2A202602584
 
-- **Vai trò:** Trưởng nhóm; phụ trách **Pha 2** và phối hợp **Pha 6** cùng Trần Long Khánh.
+- **Vai trò:** Trưởng nhóm; phụ trách **Pha 2 - Thu thập dữ liệu, làm sạch & Data Quality Gate GX 1.x** và phối hợp **Pha 6** cùng Khánh.
 - **Công việc chi tiết đã hoàn thành:**
   - Hoàn thiện `src/ingestion/crossref.py`: parse DOI, title, abstract, authors, categories và ngày ISO; có fallback từ Crossref API sang snapshot offline.
   - Hoàn thiện `src/ingestion/cleaning.py`: chuẩn hóa schema, tạo `age_days`, `summary_chars`, `text_for_embedding` và deduplicate theo `paper_id`.
