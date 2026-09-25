@@ -8,7 +8,13 @@ from sentence_transformers import SentenceTransformer
 
 @lru_cache(maxsize=4)
 def _load_model(model_name: str) -> SentenceTransformer:
-    return SentenceTransformer(model_name)
+    """Prefer an already downloaded model so the lab remains usable offline."""
+    try:
+        return SentenceTransformer(model_name, local_files_only=True)
+    except OSError:
+        # First use: allow Sentence Transformers/Hugging Face to download the
+        # public model. Subsequent runs take the offline path above.
+        return SentenceTransformer(model_name)
 
 
 class MiniLMEmbeddings(Embeddings):

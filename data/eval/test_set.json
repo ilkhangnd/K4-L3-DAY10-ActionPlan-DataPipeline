@@ -1,0 +1,53 @@
+[
+  {
+    "id": "eval_001",
+    "type": "summary",
+    "question_type": "summary",
+    "question": "What is the summary of the paper 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study'?",
+    "ground_truth": "Abstract Diagnosing jawbone lesions in oral and maxillofacial radiology remains challenging due to overlapping radiological features and the need for integrated clinical reasoning.",
+    "ground_truth_doc_ids": [
+      "10.1007/s10278-026-02086-9"
+    ]
+  },
+  {
+    "id": "eval_002",
+    "type": "authors",
+    "question_type": "authors",
+    "question": "Who authored the paper 'Retrieval-Augmented Large Language Model Agents for Automated Scientific Literature Review Generation'?",
+    "ground_truth": "Ruotong Wang, Nyutian Long, Shunqi Liu, Yuxi Wang, Zhen Qi, Huajun Zhang",
+    "ground_truth_doc_ids": [
+      "10.20944/preprints202604.0339.v1"
+    ]
+  },
+  {
+    "id": "eval_003",
+    "type": "date",
+    "question_type": "date",
+    "question": "When was the paper 'An Agentic Retrieval-Augmented Vision-Language Recommendation System for Hyperdimensional Encoding Optimization' published?",
+    "ground_truth": "2026-08-26",
+    "ground_truth_doc_ids": [
+      "10.20944/preprints202608.1849.v1"
+    ]
+  },
+  {
+    "id": "eval_004",
+    "type": "category",
+    "question_type": "category",
+    "question": "What categories does the paper 'Microsoft Azure artificial intelligence / machine learning hackathon for development of retrieval-augmented generation large language model' belong to?",
+    "ground_truth": "Uncategorized",
+    "ground_truth_doc_ids": [
+      "10.21079/11681/50309"
+    ]
+  },
+  {
+    "id": "eval_005",
+    "type": "multi_hop",
+    "question_type": "multi_hop",
+    "question": "How do 'SafeRAG: A Large-Language-Model-Based Multistage Retrieval-Augmented Framework for Oil and Gas Safety Report Generation' and 'Retrieval-Augmented Generation (RAG), Generative AI, and Agentic AI Governance: An Integrated Enterprise Governance Prioritization Architecture' connect across their research areas?",
+    "ground_truth": "SafeRAG: A Large-Language-Model-Based Multistage Retrieval-Augmented Framework for Oil and Gas Safety Report Generation is categorized as Uncategorized; Retrieval-Augmented Generation (RAG), Generative AI, and Agentic AI Governance: An Integrated Enterprise Governance Prioritization Architecture is categorized as Uncategorized.",
+    "ground_truth_doc_ids": [
+      "10.2118/234689-pa",
+      "10.21203/rs.3.rs-10012178/v1"
+    ]
+  }
+]

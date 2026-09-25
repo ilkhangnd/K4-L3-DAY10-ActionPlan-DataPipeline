@@ -137,6 +137,12 @@ def evaluate_pipeline(
         "judge_accuracy": mean(1.0 if item["judge"]["correct"] else 0.0 for item in answers),
         "mean_judge_score": mean(item["judge"]["score"] for item in answers),
     }
+    fallback_message = "Fallback heuristic judge used because the LLM evaluator was unavailable."
+    summary["judge_mode"] = (
+        "fallback_heuristic"
+        if any(item["judge"]["reasoning"] == fallback_message for item in answers)
+        else "llm"
+    )
     summary["ragas"] = _run_ragas(settings, answers)
 
     bundle = EvaluationBundle(summary=summary, answers=answers)

@@ -41,6 +41,11 @@ class Paths:
     repaired_answers: Path
     comparison_report: Path
 
+    @property
+    def test_set_json(self) -> Path:
+        """Backward-compatible name used by the checkpoint instructions."""
+        return self.eval_testset
+
 
 @dataclass(frozen=True)
 class Settings:
