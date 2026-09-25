@@ -13,7 +13,7 @@
 | 1 | Nguyễn Đình Khang | 2A202602584 | 26ai.khangnd2@vinuni.edu.vn | **Trưởng nhóm; Pha 2 & phối hợp Pha 6.** Thu thập Crossref, cleaning, GX/freshness; safe repair và đối chiếu ba trạng thái. | [`2A202602584_NguyenDinhKhang.md`](../report/2A202602584_NguyenDinhKhang.md) |
 | 2 | Phạm Hồ Quang Dũng | 2A202602860 | 26ai.dungphq@vinuni.edu.vn | **Pha 3.** Benchmark test set, MiniLM embedding, ChromaDB vector index và smoke test retrieval. | [`2A202602860_PhamHoQuangDung.md`](../report/2A202602860_PhamHoQuangDung.md) |
 | 3 | Ngô Gia Quốc | 2A202602757 | 26ai.quocng@vinuni.eu.vn | **Pha 4.** Tích hợp baseline pipeline, baseline evaluation/report và portability khi nạp index. | [`2A202602757_NgoGiaQuoc.md`](../report/2A202602757_NgoGiaQuoc.md) |
-| 4 | Trần Long Khánh | 2A202602538 | — | **Pha 5 & phối hợp Pha 6.** Bộ corruption sáu kịch bản, corruption flow, repair/integration và nghiệm thu báo cáo đối chiếu. | [`2A202602538_TranLongKhanh.md`](../report/2A202602538_TranLongKhanh.md) |
+| 4 | Trần Long Khánh | 2A202602538 | 26ai.khanhtl2@vinuni.edu.vn | **Pha 5 & phối hợp Pha 6.** Bộ corruption sáu kịch bản, corruption flow, repair/integration và nghiệm thu báo cáo đối chiếu. | [`2A202602538_TranLongKhanh.md`](../report/2A202602538_TranLongKhanh.md) |
 
 ---
 
