@@ -514,7 +514,7 @@ div[class*="gradio-container"] {
   flex: 1 1 0% !important;
   width: calc(100% - 215px) !important;
   min-width: 0 !important;
-  padding: 16px 26px 36px !important;
+  padding: 12px 24px 24px !important;
   box-sizing: border-box !important;
   overflow-y: auto !important;
 }
@@ -523,13 +523,13 @@ div[class*="gradio-container"] {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 10px 22px;
+  padding: 8px 10px 22px;
 }
 .brand-icon {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 9px;
   background: var(--orange-soft);
   color: var(--orange);
@@ -548,30 +548,51 @@ div[class*="gradio-container"] {
   font-size: 0.68rem;
 }
 
-.nav-btn {
-  margin: 3px 0 !important;
-}
+#sidebar .nav-btn,
+#sidebar .nav-btn button,
+button.nav-btn,
 .nav-btn button {
   justify-content: flex-start !important;
+  text-align: left !important;
+  width: 100% !important;
   height: 42px !important;
   min-height: 42px !important;
   border: 0 !important;
   border-radius: 8px !important;
   background: transparent !important;
   color: #475569 !important;
-  font-size: 0.82rem !important;
-  font-weight: 650 !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
   box-shadow: none !important;
   transition: all 0.15s ease !important;
   padding: 0 12px !important;
+  cursor: pointer !important;
 }
-.nav-btn button:hover {
-  background: #f1f5f9 !important;
+#sidebar .nav-btn:hover button,
+#sidebar .nav-btn button:hover,
+button.nav-btn:hover {
+  background: #f8fafc !important;
   color: var(--ink) !important;
 }
+#sidebar .nav-active button,
+button.nav-active,
 .nav-active button {
-  color: var(--orange) !important;
+  color: #ff7417 !important;
   background: #fff3ea !important;
+  font-weight: 750 !important;
+  position: relative !important;
+}
+#sidebar .nav-active button::before,
+button.nav-active::before,
+.nav-active button::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 7px !important;
+  bottom: 7px !important;
+  width: 3.5px !important;
+  background: #ff7417 !important;
+  border-radius: 0 3px 3px 0 !important;
 }
 
 .side-footer {
@@ -591,8 +612,7 @@ div[class*="gradio-container"] {
   position: relative;
   overflow: hidden;
   margin: 0 0 16px;
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: 6px 12px 10px;
   background: transparent;
 }
 .hero-copy h1 {
@@ -632,6 +652,10 @@ div[class*="gradio-container"] {
   margin-bottom: 6px !important;
 }
 
+input[type=range] {
+  accent-color: #ff7417 !important;
+}
+
 #main-chat-row {
   display: flex !important;
   flex-direction: row !important;
@@ -642,7 +666,7 @@ div[class*="gradio-container"] {
 .assistant-panel, .source-panel {
   display: flex !important;
   flex-direction: column !important;
-  min-height: 560px !important;
+  min-height: 580px !important;
 }
 
 .panel-heading {
@@ -679,7 +703,7 @@ div[class*="gradio-container"] {
 }
 .count-chip {
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 4px 12px;
   font-size: 0.7rem;
   font-weight: 750;
   color: var(--orange);
@@ -687,12 +711,13 @@ div[class*="gradio-container"] {
 }
 .help-pill {
   border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 0.68rem;
+  padding: 4px 12px;
+  font-size: 0.7rem;
   font-weight: 650;
-  color: #64748b;
+  color: #475569;
   background: #f8fafc;
   border: 1px solid var(--line);
+  cursor: pointer;
 }
 
 .assistant-welcome {
@@ -701,20 +726,20 @@ div[class*="gradio-container"] {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  padding: 24px 20px 16px !important;
+  padding: 28px 20px 14px !important;
 }
 .robot-mascot {
-  margin-bottom: 12px !important;
+  margin-bottom: 14px !important;
 }
 .assistant-welcome h2 {
-  font-size: 1.25rem !important;
+  font-size: 1.3rem !important;
   font-weight: 800 !important;
   color: #0f172a !important;
   margin: 0 0 6px !important;
   letter-spacing: -0.03em !important;
 }
 .assistant-welcome p {
-  font-size: 0.82rem !important;
+  font-size: 0.84rem !important;
   color: #64748b !important;
   max-width: 480px !important;
   line-height: 1.45 !important;
@@ -726,52 +751,20 @@ div[class*="gradio-container"] {
   box-shadow: none !important;
   padding: 8px 14px !important;
 }
-.prompt-row {
-  padding: 12px 16px 14px !important;
-  border-top: 1px solid #edf1f7 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-}
-.prompt-row textarea, .prompt-row input {
-  border-radius: 9px !important;
-  border: 1px solid #e2e8f0 !important;
-  background: #ffffff !important;
-  font-size: 0.84rem !important;
-  padding: 10px 14px !important;
-}
-.prompt-row textarea:focus, .prompt-row input:focus {
-  border-color: #ff7417 !important;
-  box-shadow: 0 0 0 3px rgba(255, 116, 23, 0.12) !important;
-}
-.primary-btn button {
-  height: 42px !important;
-  min-height: 42px !important;
-  border: 0 !important;
-  border-radius: 8px !important;
-  background: #ff7417 !important;
-  box-shadow: 0 3px 8px rgba(255, 116, 23, 0.28) !important;
-  font-size: 0.82rem !important;
-  font-weight: 750 !important;
-  color: #ffffff !important;
-  transition: all 0.15s ease !important;
-}
-.primary-btn button:hover {
-  background: #ea580c !important;
-  transform: translateY(-1px);
-}
 
 .example-row {
-  padding: 6px 16px 16px !important;
+  padding: 6px 16px 14px !important;
   gap: 12px !important;
 }
-.example-btn button {
+.example-btn button,
+button.example-btn,
+.example-btn {
   background: #ffffff !important;
   border: 1px solid #edf1f7 !important;
   border-radius: 12px !important;
   padding: 14px 14px !important;
   height: auto !important;
-  min-height: 64px !important;
+  min-height: 58px !important;
   text-align: left !important;
   justify-content: flex-start !important;
   color: #334155 !important;
@@ -780,13 +773,72 @@ div[class*="gradio-container"] {
   line-height: 1.35 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
   transition: all 0.2s ease !important;
+  cursor: pointer !important;
 }
-.example-btn button:hover {
+.example-btn button:hover,
+button.example-btn:hover {
   border-color: #ffba88 !important;
   background: #fffaf5 !important;
   color: #ea580c !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(255, 116, 23, 0.08) !important;
+  box-shadow: 0 4px 12px rgba(255, 116, 23, 0.08) !important;
+}
+
+.prompt-row {
+  background: #ffffff !important;
+  border: 1px solid #edf1f7 !important;
+  border-radius: 12px !important;
+  padding: 6px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03) !important;
+  margin: 8px 16px 16px !important;
+}
+.prompt-row .clip-icon {
+  font-size: 1.25rem !important;
+  color: #94a3b8 !important;
+  padding: 0 4px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+.prompt-row textarea, .prompt-row input {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  font-size: 0.88rem !important;
+  color: #1e293b !important;
+  padding: 8px 6px !important;
+}
+.prompt-row textarea:focus, .prompt-row input:focus {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.prompt-row .block, .prompt-row .form {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.primary-btn button, button.primary-btn {
+  height: 40px !important;
+  min-height: 40px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #ff7417 !important;
+  box-shadow: 0 2px 6px rgba(255, 116, 23, 0.28) !important;
+  font-size: 0.84rem !important;
+  font-weight: 750 !important;
+  color: #ffffff !important;
+  padding: 0 18px !important;
+  transition: all 0.15s ease !important;
+}
+.primary-btn button:hover, button.primary-btn:hover {
+  background: #ea580c !important;
+  transform: translateY(-1px);
 }
 
 .source-panel {
@@ -1224,8 +1276,6 @@ def build_demo() -> gr.Blocks:
                 nav_chat = gr.Button("💬   Chatbot", elem_classes=["nav-btn", "nav-active"])
                 nav_search = gr.Button("🔍   Semantic search", elem_classes="nav-btn")
                 nav_observability = gr.Button("📊   Observability", elem_classes="nav-btn")
-                nav_architecture = gr.Button("◇   Architecture", elem_classes="nav-btn")
-                nav_tests = gr.Button("✓   Test scenarios", elem_classes="nav-btn")
                 gr.HTML("<div class='side-footer'>⚙&nbsp;&nbsp; Settings<br>ⓘ&nbsp;&nbsp; About</div>")
 
             with gr.Column(elem_id="workspace"):
@@ -1259,7 +1309,7 @@ def build_demo() -> gr.Blocks:
                                 send = gr.Button("✈  Send", variant="primary", scale=1, elem_classes="primary-btn")
                         with gr.Column(scale=9, min_width=360, elem_classes="source-panel"):
                             gr.HTML(
-                                "<div class='panel-heading'><div class='panel-icon'>📄</div><div><h2>Retrieved documents</h2></div><div class='panel-spacer'></div><span class='count-chip'>4 documents</span></div>"
+                                "<div class='panel-heading'><div class='panel-icon'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z' stroke='#FF7417' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M14 2V8H20' stroke='#FF7417' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M16 13H8' stroke='#FF7417' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M16 17H8' stroke='#FF7417' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></div><div><h2>Retrieved documents</h2></div><div class='panel-spacer'></div><span class='count-chip'>4 documents</span></div>"
                             )
                             chat_sources = gr.HTML(_source_cards_html())
 
@@ -1276,34 +1326,46 @@ def build_demo() -> gr.Blocks:
                     search_query.submit(semantic_search, [search_query, search_state, search_top_k], [search_results, search_context])
 
                 with gr.Column(visible=False) as observability_panel:
-                    gr.Markdown("## Data observability dashboard")
-                    kpi_cards = gr.HTML(kpi_cards_html())
-                    dashboard = gr.Markdown(observability_markdown(), elem_classes="dashboard-card")
-                    refresh = gr.Button("Refresh artifact metrics", elem_classes="secondary-btn")
-                    refresh.click(refresh_observability, outputs=[kpi_cards, dashboard])
-                    gr.Markdown("Reports: `data/reports/phase1_report.md` and `data/reports/corruption_report.md`. The UI is read-only and never exposes `.env` values.")
+                    with gr.Tabs():
+                        with gr.Tab("📊   Observability & KPIs"):
+                            gr.Markdown("## Data observability dashboard")
+                            kpi_cards = gr.HTML(kpi_cards_html())
+                            dashboard = gr.Markdown(observability_markdown(), elem_classes="dashboard-card")
+                            refresh = gr.Button("Refresh artifact metrics", elem_classes="secondary-btn")
+                            refresh.click(refresh_observability, outputs=[kpi_cards, dashboard])
+                            gr.Markdown("Reports: `data/reports/phase1_report.md` and `data/reports/corruption_report.md`.")
+                        with gr.Tab("◇   Architecture"):
+                            gr.HTML(ARCHITECTURE_HTML)
+                            gr.Markdown("**Presentation angle:** Baseline → Corrupted → Repaired shows Great Expectations detecting data faults before retrieval fails.")
+                        with gr.Tab("✓   Test scenarios"):
+                            gr.Markdown("## Demo verification checklist")
+                            scenario_view = gr.HTML(test_scenarios_html())
+                            scenario_refresh = gr.Button("Re-check scenarios", elem_classes="secondary-btn")
+                            scenario_refresh.click(test_scenarios_html, outputs=scenario_view)
 
-                with gr.Column(visible=False) as architecture_panel:
-                    gr.HTML(ARCHITECTURE_HTML)
-                    gr.Markdown("**Presentation angle:** Baseline → Corrupted → Repaired shows GX detecting a data fault before low-quality retrieval becomes an invisible business failure.")
+                nav_buttons = [nav_chat, nav_search, nav_observability]
+                panels = [chat_panel, search_panel, observability_panel]
 
-                with gr.Column(visible=False) as tests_panel:
-                    gr.Markdown("## Demo verification checklist\nEach row compares the expected condition with artifacts generated by the pipeline.")
-                    scenario_view = gr.HTML(test_scenarios_html())
-                    scenario_refresh = gr.Button("Re-check scenarios", elem_classes="secondary-btn")
-                    scenario_refresh.click(test_scenarios_html, outputs=scenario_view)
-                    gr.Markdown("Full expected results and speaking notes: `ui_demo/TEST_SCENARIOS.md` and `ui_demo/ARCHITECTURE.md`.")
+                def select_tab(index: int):
+                    nav_updates = [
+                        gr.update(elem_classes=["nav-btn", "nav-active"] if i == index else ["nav-btn"])
+                        for i in range(len(nav_buttons))
+                    ]
+                    panel_updates = [
+                        gr.update(visible=i == index)
+                        for i in range(len(panels))
+                    ]
+                    return nav_updates + panel_updates
 
-                panels = [chat_panel, search_panel, observability_panel, architecture_panel, tests_panel]
+                nav_chat.click(lambda: select_tab(0), outputs=nav_buttons + panels)
+                nav_search.click(lambda: select_tab(1), outputs=nav_buttons + panels)
+                nav_observability.click(lambda: select_tab(2), outputs=nav_buttons + panels)
 
-                def show_panel(index: int):
-                    return [gr.update(visible=position == index) for position in range(len(panels))]
-
-                nav_chat.click(lambda: show_panel(0), outputs=panels)
-                nav_search.click(lambda: show_panel(1), outputs=panels)
-                nav_observability.click(lambda: show_panel(2), outputs=panels)
-                nav_architecture.click(lambda: show_panel(3), outputs=panels)
-                nav_tests.click(lambda: show_panel(4), outputs=panels)
+                corpus_state.change(
+                    lambda state: _source_cards_html(state_name=state),
+                    inputs=[corpus_state],
+                    outputs=chat_sources,
+                )
 
                 author_question = "Ai là tác giả của bài báo 'Retrieval-Augmented Large Language Model Agents for Automated Scientific Literature Review Generation'?"
                 summary_question = "Tóm tắt nội dung chính của bài báo 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study' là gì?"

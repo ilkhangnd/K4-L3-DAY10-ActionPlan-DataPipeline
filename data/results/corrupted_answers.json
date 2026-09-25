@@ -21,9 +21,9 @@
     "retrieval_hit": true,
     "token_f1": 0.0,
     "judge": {
-      "score": 2,
+      "score": 1,
       "correct": false,
-      "reasoning": "The model answer is empty and does not provide any summary or information about the paper. The reference answer gives a brief context about the challenge in diagnosing jawbone lesions, which is relevant. Since the model answer lacks content, it cannot be considered correct or useful."
+      "reasoning": "Fallback heuristic judge used because the LLM evaluator was unavailable."
     }
   },
   {
@@ -50,7 +50,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "The model answer exactly matches the reference answer, listing all the authors correctly and completely."
+      "reasoning": "Fallback heuristic judge used because the LLM evaluator was unavailable."
     }
   },
   {
@@ -64,12 +64,10 @@
     "answer": "2026-08-26",
     "retrieved_doc_ids": [
       "10.20944/preprints202608.1849.v1",
-      "10.20944/preprints202608.1849.v1",
       "10.63646/kpqm1958",
       "10.55041/isjem07213"
     ],
     "retrieved_contexts": [
-      "Title: An Agent\nAuthors: Fardin Jalil Piran, Rajiv Malhotra, Farhad Imani\nPublished: 2026-08-26\nCategories: Uncategorized\nSummary: Selecting an encoding configuration for Hyperdimensional Computing (HDC) determines whether a model fits the memory budget of an Internet of Things (IoT) device, yet the knowledge needed to make that choice is dispersed across thousands of papers in a form no optimizer can query. The configuration space is large and each evaluation is expensive, so exhaustive search is infeasible; sequential optimizers are the standard remedy, but they begin from an uninformed prior and spend early evaluations exploring blindly. We present an agentic Retrieval-Augmented Generation (RAG) recommendation system that converts the HDC literature into an informed starting point for this search. A corpus of 1,518 HDC papers is indexed multimodally. A vision-language model (VLM) describes 1,755 figure regions extracted from source PDFs, making plotted evidence such as accuracy against dimension curves retrievable alongside prose and tables. Given a task profile stating the dataset characteristics, target hardware, objectives, and memory budget, the agent retrieves evidence under an allocation that reserves context for figures, and returns an encoding configuration with supporting citations. That configuration seeds the first trial of a constrained multi-objective search over accuracy and inference memory, which then refines it, and feasibility is enforced by external measurement rather than by the model. On network intrusion detection (CICIDS2017) and bearing fault diagnosis (CWRU), the literature-grounded start raised the hypervolume of the recovered Pareto front by 17.4% and 19.1% over an identically budgeted search from a random draw, at no additional evaluation cost. A natural extension is to let the system perform the data preprocessing that the practitioner now supplies, so that a deployment can be described end to end from raw sensor streams.",
       "Title: An Agent\nAuthors: Fardin Jalil Piran, Rajiv Malhotra, Farhad Imani\nPublished: 2026-08-26\nCategories: Uncategorized\nSummary: Selecting an encoding configuration for Hyperdimensional Computing (HDC) determines whether a model fits the memory budget of an Internet of Things (IoT) device, yet the knowledge needed to make that choice is dispersed across thousands of papers in a form no optimizer can query. The configuration space is large and each evaluation is expensive, so exhaustive search is infeasible; sequential optimizers are the standard remedy, but they begin from an uninformed prior and spend early evaluations exploring blindly. We present an agentic Retrieval-Augmented Generation (RAG) recommendation system that converts the HDC literature into an informed starting point for this search. A corpus of 1,518 HDC papers is indexed multimodally. A vision-language model (VLM) describes 1,755 figure regions extracted from source PDFs, making plotted evidence such as accuracy against dimension curves retrievable alongside prose and tables. Given a task profile stating the dataset characteristics, target hardware, objectives, and memory budget, the agent retrieves evidence under an allocation that reserves context for figures, and returns an encoding configuration with supporting citations. That configuration seeds the first trial of a constrained multi-objective search over accuracy and inference memory, which then refines it, and feasibility is enforced by external measurement rather than by the model. On network intrusion detection (CICIDS2017) and bearing fault diagnosis (CWRU), the literature-grounded start raised the hypervolume of the recovered Pareto front by 17.4% and 19.1% over an identically budgeted search from a random draw, at no additional evaluation cost. A natural extension is to let the system perform the data preprocessing that the practitioner now supplies, so that a deployment can be described end to end from raw sensor streams.",
       "Title: The Age of Autonomous Agents: A Bibliometric Review of Agentic AI Architectures, Applications, and Emerging Challenges\nAuthors: Ben J. Weber, Clara M. Hofmann, Amara N. Okoye\nPublished: 2021-09-26\nCategories: Uncategorized\nSummary: The rapid evolution of large language models (LLMs) has catalyzed a shift from passive AI systems toward autonomous agentic architectures capable of reasoning, memory, tool use, and multi-agent collaboration. This bibliometric review characterizes the emerging field through 810 publications retrieved from the Web of Science Core Collection for the period 2023\u20132025. Annual output rose sharply over this window\u2014from 4 publications in 2023 to 96 in 2024 and 710 in 2025\u2014accompanied by a parallel rise in citations, indicating rapid mainstream adoption. Author-keyword analysis reveals a landscape dominated by large language models, artificial intelligence, and multi-agent systems, with agentic AI, generative AI, and retrieval-augmented generation (RAG) emerging as core themes. Research output is geographically concentrated, led by China and the United States, and is distributed across a broad range of engineering, applied-science, and domain-specific journals rather than a single specialist venue, reflecting the field's cross-disciplinary uptake. Synthesizing this corpus, we organize the technical landscape around reasoning, memory, tool integration and RAG, and multi-agent orchestration; survey application domains spanning healthcare, scientific discovery, education, and software engineering, with emerging activity in finance and law; and analyze the principal challenges\u2014hallucination, trust and robustness, inter-agent coordination, scalability, and governance. The review provides a structured, evidence-based map of agentic AI research to orient researchers and practitioners navigating this rapidly evolving field.",
       "Title: Speculative Retrieval-Augmented Generation for Cost-Efficient Large Language Model Inference\nAuthors: Dr. Sumalatha P, Manoj Kumar\nPublished: 2021-09-26\nCategories: Uncategorized\nSummary: Abstract - This work focuses on the two crucial bottlenecks in Retrieval-Augmented Generation (RAG): high inference latency and expensive computation cost. RAG enhances the factual correctness of Large Language Models (LLMs) by utilizing external knowledge sources; However, the auto-To achieve a good recall, the system applies a two-way retrieval mechanism: Dense retrieval: This module uses BAAI/bge-small-en-v1.5 to create a 384-dimensional embedding space, where queries and documents are mapped. The embeddings are stored in a FAISS IndexFlatL2. Sparse retrieval: This module uses TF-IDF vectorization to capture an exact keyword match. Reranking: A simple heuristic mechanism of matching substrings of the query terms in the documents selected to perform the final step of ranking them for prompt introduce a novel speculative RAG framework that combines hybrid retrieval with speculative decoding. Our framework employs hybrid dense vector search (BGE-small) and sparse keyword search (TF-IDF) for enhanced recall followed by a lightweight re-ranker model. A compact draft model (TinyLlama-1.1B) makes tentative future token generation, then a larger verifier model (Mistral-7B) checks the correctness of the candidate token. Empirical experiments demonstrate 33% and 29% improvement in inference latency and token reduction, respectively, compared to the baseline of a typical 7B model, while retaining 94% accuracy on factoid tasks. Key Words: Retrieval-Augmented Generation, Speculative Decoding, Large Language Models, Inference Optimization, Hybrid Retrieval"
@@ -79,7 +77,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "The model answer exactly matches the reference answer, providing the correct publication date for the paper."
+      "reasoning": "Fallback heuristic judge used because the LLM evaluator was unavailable."
     }
   },
   {
@@ -92,23 +90,23 @@
     ],
     "answer": "Uncategorized",
     "retrieved_doc_ids": [
+      "10.21079/11681/50309",
       "10.63646/kpqm1958",
       "10.20944/preprints202604.0339.v1",
-      "10.20944/preprints202604.0339.v1",
-      "10.20944/preprints202608.1849.v1"
+      "10.20944/preprints202604.0339.v1"
     ],
     "retrieved_contexts": [
+      "Title: Microsof\nAuthors: Janet L. Autrey, Lacey S. Duckworth, Ashly N. Horner, Thomas Sigler, Victoria D. Moore\nPublished: 2026-07-01\nCategories: Uncategorized\nSummary: The US Army Corps of Engineers (USACE) Civil Works (CW) research and development (R&D) mission is to address challenging environmental sustainability problems through innovative science and engineering, which helps to ensure a safer, more prosperous, and more resilient nation. To achieve this, the US Army Engineer Research and Development Center (ERDC) plans, executes, leads, and directs many R&D programs in coordination with USACE Headquarters, Districts, and Divisions through its multiple strategic focus areas, which include infrastructure, water modeling, crisis preparedness, ecosystem, sediment management, data, artificial intelligence, and robotics. In this process, much information is generated, including internal progress reviews, financial reports, scopes of work, work package planning, and success stories.",
       "Title: The Age of Autonomous Agents: A Bibliometric Review of Agentic AI Architectures, Applications, and Emerging Challenges\nAuthors: Ben J. Weber, Clara M. Hofmann, Amara N. Okoye\nPublished: 2021-09-26\nCategories: Uncategorized\nSummary: The rapid evolution of large language models (LLMs) has catalyzed a shift from passive AI systems toward autonomous agentic architectures capable of reasoning, memory, tool use, and multi-agent collaboration. This bibliometric review characterizes the emerging field through 810 publications retrieved from the Web of Science Core Collection for the period 2023\u20132025. Annual output rose sharply over this window\u2014from 4 publications in 2023 to 96 in 2024 and 710 in 2025\u2014accompanied by a parallel rise in citations, indicating rapid mainstream adoption. Author-keyword analysis reveals a landscape dominated by large language models, artificial intelligence, and multi-agent systems, with agentic AI, generative AI, and retrieval-augmented generation (RAG) emerging as core themes. Research output is geographically concentrated, led by China and the United States, and is distributed across a broad range of engineering, applied-science, and domain-specific journals rather than a single specialist venue, reflecting the field's cross-disciplinary uptake. Synthesizing this corpus, we organize the technical landscape around reasoning, memory, tool integration and RAG, and multi-agent orchestration; survey application domains spanning healthcare, scientific discovery, education, and software engineering, with emerging activity in finance and law; and analyze the principal challenges\u2014hallucination, trust and robustness, inter-agent coordination, scalability, and governance. The review provides a structured, evidence-based map of agentic AI research to orient researchers and practitioners navigating this rapidly evolving field.",
       "Title: Retrieval-Augmented Large Language Model Agents for Automated Scientific Literature Review Generation\nAuthors: Ruotong Wang, Nyutian Long, Shunqi Liu, Yuxi Wang, Zhen Qi, Huajun Zhang\nPublished: 2026-04-06\nCategories: Uncategorized\nSummary: ",
-      "Title: Retrieval-Augmented Large Language Model Agents for Automated Scientific Literature Review Generation\nAuthors: Ruotong Wang, Nyutian Long, Shunqi Liu, Yuxi Wang, Zhen Qi, Huajun Zhang\nPublished: 2026-04-06\nCategories: Uncategorized\nSummary: ",
-      "Title: An Agent\nAuthors: Fardin Jalil Piran, Rajiv Malhotra, Farhad Imani\nPublished: 2026-08-26\nCategories: Uncategorized\nSummary: Selecting an encoding configuration for Hyperdimensional Computing (HDC) determines whether a model fits the memory budget of an Internet of Things (IoT) device, yet the knowledge needed to make that choice is dispersed across thousands of papers in a form no optimizer can query. The configuration space is large and each evaluation is expensive, so exhaustive search is infeasible; sequential optimizers are the standard remedy, but they begin from an uninformed prior and spend early evaluations exploring blindly. We present an agentic Retrieval-Augmented Generation (RAG) recommendation system that converts the HDC literature into an informed starting point for this search. A corpus of 1,518 HDC papers is indexed multimodally. A vision-language model (VLM) describes 1,755 figure regions extracted from source PDFs, making plotted evidence such as accuracy against dimension curves retrievable alongside prose and tables. Given a task profile stating the dataset characteristics, target hardware, objectives, and memory budget, the agent retrieves evidence under an allocation that reserves context for figures, and returns an encoding configuration with supporting citations. That configuration seeds the first trial of a constrained multi-objective search over accuracy and inference memory, which then refines it, and feasibility is enforced by external measurement rather than by the model. On network intrusion detection (CICIDS2017) and bearing fault diagnosis (CWRU), the literature-grounded start raised the hypervolume of the recovered Pareto front by 17.4% and 19.1% over an identically budgeted search from a random draw, at no additional evaluation cost. A natural extension is to let the system perform the data preprocessing that the practitioner now supplies, so that a deployment can be described end to end from raw sensor streams."
+      "Title: Retrieval-Augmented Large Language Model Agents for Automated Scientific Literature Review Generation\nAuthors: Ruotong Wang, Nyutian Long, Shunqi Liu, Yuxi Wang, Zhen Qi, Huajun Zhang\nPublished: 2026-04-06\nCategories: Uncategorized\nSummary: "
     ],
-    "retrieval_hit": false,
+    "retrieval_hit": true,
     "token_f1": 1.0,
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "Both the model answer and the reference answer are identical, stating 'Uncategorized'. This matches the expected category, so the model answer is fully correct."
+      "reasoning": "Fallback heuristic judge used because the LLM evaluator was unavailable."
     }
   },
   {
@@ -134,9 +132,9 @@
     "retrieval_hit": true,
     "token_f1": 0.1851851851851852,
     "judge": {
-      "score": 2,
+      "score": 1,
       "correct": false,
-      "reasoning": "The model answer provides a general statement about using LLMs for safety report generation in high-risk industries, which relates to the first paper's topic. However, it does not address the connection between the two papers or discuss the second paper's focus on enterprise governance and AI governance. Therefore, it fails to answer the question about how the two papers connect across their research areas."
+      "reasoning": "Fallback heuristic judge used because the LLM evaluator was unavailable."
     }
   }
 ]
