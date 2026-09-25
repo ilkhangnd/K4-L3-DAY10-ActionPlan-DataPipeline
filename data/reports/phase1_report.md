@@ -15,11 +15,11 @@
 
 | Metric | Value |
 | --- | ---: |
-| Benchmark samples | 5 |
+| Benchmark samples | 10 |
 | Retrieval hit rate | 100.00% |
-| Mean token F1 | 0.8370 |
-| LLM judge accuracy | 80.00% |
-| Mean LLM judge score | 4.2000 / 5 |
+| Mean token F1 | 0.7403 |
+| LLM judge accuracy | 70.00% |
+| Mean LLM judge score | 3.8000 / 5 |
 | Judge mode | fallback_heuristic |
 | Ragas | Set RUN_RAGAS=1 to enable the slower Ragas pass. |
 

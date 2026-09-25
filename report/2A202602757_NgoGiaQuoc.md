@@ -43,7 +43,7 @@ Phần việc của tôi dùng output của Dinh Khang (`crossref.py`, `cleaning
 | Bỏ ChromaDB nhị phân khỏi git | `.gitignore` | `data/chroma/*` bị ignore | `git status` không còn hiện thư mục UUID trong `data/chroma/` |
 Nêu một output cụ thể mà phần việc của bạn tạo ra hoặc giúp xác minh:
 
-`data/results/baseline_metrics.json`: `samples = 10`, `retrieval_hit_rate = 1.0`, `mean_token_f1 = 1.0`, `judge_accuracy = 1.0`, `mean_judge_score = 5`. Kết quả này được sinh sau khi pipeline phát hiện và tạo lại test set lỗi thời. Lần chạy đầu với test set cũ chỉ đạt hit rate 0.0 và F1 0.01. Lưu ý: judge ở đây là fallback heuristic, không phải Gemini (xem mục 6).
+`data/results/baseline_metrics.json`: `samples = 10`, `retrieval_hit_rate = 1.0`, `mean_token_f1 = 0.7403`, `judge_accuracy = 0.7`, `mean_judge_score = 3.8`. Kết quả này được sinh sau khi pipeline phát hiện và tạo lại test set cũ chỉ có 5 câu. Judge ở lần chạy này dùng `fallback_heuristic`.
 
 ## 4. Giải thích phần kỹ thuật đã thực hiện
 
@@ -91,9 +91,9 @@ python script/run_phase1.py
 
 - **Triệu chứng/lỗi nguyên văn:** Lần chạy đầu `run_phase1.py` in `[6/7] Baseline metrics: hit_rate=0.00 token_f1=0.01 judge_accuracy=0.00 judge_score=1.00`, dù pipeline không báo lỗi.
 - **Lệnh hoặc bước tái hiện:** Dùng `data/eval/test_set.json` từ commit `c027439` với snapshot raw hiện tại, chạy `python script/run_phase1.py`.
-- **Nguyên nhân gốc:** Test set hỏi về các bài `10.1145/3637528.36718xx`, trong khi `data/raw/crossref_records.json` hiện tại chứa 24 bài Crossref khác. `load_or_create_test_set` thấy file tồn tại nên dùng lại mà không kiểm tra ground truth có trong dữ liệu không. Đây là một silent failure: mọi artifact đều được sinh ra nhưng metric vô nghĩa.
-- **Cách xử lý:** Sau khi load test set, so `ground_truth_doc_ids` với `set(df["paper_id"])`. Nếu có id không tồn tại thì gọi `build_test_set(df, paths.eval_testset)`.
-- **Cách xác minh sau khi sửa:** Chạy lại pipeline. Log in `Test set references papers missing from the clean data; rebuilding it`, và metric đạt `hit_rate=1.00 token_f1=1.00`.
+- **Nguyên nhân gốc:** Test set cũ chỉ có 5 mẫu; `load_or_create_test_set` thấy file tồn tại nên dùng lại mà không kiểm tra benchmark có đủ số mẫu chuẩn hiện tại không. Điều này làm checklist 10 câu và artifact thực tế bị lệch.
+- **Cách xử lý:** `load_or_create_test_set()` kiểm tra benchmark có đúng 10 câu và đủ 5 loại câu hỏi hay không; `phase1.py` tiếp tục so `ground_truth_doc_ids` với `set(df["paper_id"])` để rebuild khi DOI không còn thuộc clean corpus.
+- **Cách xác minh sau khi sửa:** Chạy lại pipeline, console in `24 clean records, 10 benchmark questions`; metrics baseline có `samples = 10` và `hit_rate = 1.00`.
 - **Điều học được:** Artifact "có tồn tại" chưa có nghĩa là "hợp lệ". Mỗi artifact dùng lại giữa các lần chạy cần được kiểm tra nó khớp với dữ liệu hiện tại, nếu không pipeline vẫn "chạy thành công" nhưng kết quả sai.
 
 **Blocker chưa xử lý xong: lỗi SSL khi gọi Gemini/HuggingFace**

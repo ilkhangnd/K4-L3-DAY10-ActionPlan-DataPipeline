@@ -128,11 +128,12 @@ python -c "from core.config import load_settings; from observability.quality imp
 
 ## Bước 5: Tạo Bộ Đề Thi Chuẩn (Benchmark Test Set) (`src/evaluation/testset.py`)
 
-Để biết AI trả lời đúng hay sai, chúng ta cần một "đề thi chuẩn có sẵn đáp án" (Ground Truth) gồm 10 câu hỏi đa dạng, chia đều vào 4 dạng bài toán:
+Để biết AI trả lời đúng hay sai, chúng ta cần một "đề thi chuẩn có sẵn đáp án" (Ground Truth) gồm 10 câu hỏi đa dạng, chia đều thành 2 câu cho mỗi trong 5 dạng bài toán:
 1. `summary`: Hỏi tóm tắt nội dung chính của một bài báo cụ thể.
 2. `authors`: Hỏi ai là tác giả của công trình nghiên cứu.
 3. `date`: Hỏi thời điểm bài báo được xuất bản.
-4. `categories`: Hỏi về chuyên ngành / lĩnh vực phân loại.
+4. `category`: Hỏi về chuyên ngành / lĩnh vực phân loại.
+5. `multi_hop`: So sánh hoặc kết nối lĩnh vực nghiên cứu của hai bài báo.
 
 Mỗi câu hỏi mẫu trong file `test_set.json` có cấu trúc rõ ràng:
 ```json

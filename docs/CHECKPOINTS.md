@@ -63,9 +63,9 @@
 ---
 
 ### Checkpoint 2: Benchmark Test Set & ChromaDB Vector Store Indexing (30 phút)
-- **Mục tiêu:** Xây dựng bộ test đánh giá chuẩn hóa gồm các câu hỏi qua 4 nhóm nghiệp vụ và đánh chỉ mục vector trên ChromaDB.
+- **Mục tiêu:** Xây dựng bộ test đánh giá chuẩn hóa gồm 10 câu hỏi qua 5 nhóm nghiệp vụ và đánh chỉ mục vector trên ChromaDB.
 - **Nhiệm vụ:**
-  1. Viết logic sinh câu hỏi đánh giá trong `src/evaluation/testset.py` phủ đủ 4 nhóm: `summary`, `authors`, `date`, `categories`.
+  1. Viết logic sinh 10 câu hỏi đánh giá trong `src/evaluation/testset.py`, phủ đủ 5 nhóm: `summary`, `authors`, `date`, `category`, `multi_hop`.
   2. Lưu kết quả ra file `data/eval/test_set.json`.
   3. Khởi tạo ChromaDB collection `papers-baseline`, nạp vector embedding sinh từ `all-MiniLM-L6-v2` cho toàn bộ các tài liệu sạch.
 - **Tín hiệu nghiệm thu:**

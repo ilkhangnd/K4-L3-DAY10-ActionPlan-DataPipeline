@@ -34,7 +34,7 @@
 
 | Nhiệm vụ đã thực hiện | File/hàm/artifact liên quan | Kết quả bàn giao | Cách xác minh |
 | --- | --- | --- | --- |
-| Xây dựng benchmark xác định, tái lập được | `src/evaluation/testset.py` | 10 câu hỏi thuộc 4 loại `summary`, `authors`, `date`, `categories` | Đọc `data/eval/test_set.json` và kiểm tra schema |
+| Xây dựng benchmark xác định, tái lập được | `src/evaluation/testset.py` | 10 câu hỏi thuộc 5 loại `summary`, `authors`, `date`, `category`, `multi_hop` | Đọc `data/eval/test_set.json` và kiểm tra schema |
 | Gắn ground truth với tài liệu nguồn | `ground_truth_doc_ids` | Mỗi câu hỏi có DOI ổn định của tài liệu đúng | Đối chiếu ID với `paper_id` trong dữ liệu sạch |
 | Tạo vector index | `data/chroma/`, `papers_embeddings.json` | 24 tài liệu trong collection `papers-baseline` | `collection.count()` trả về 24 |
 | Kiểm thử semantic retrieval | `LocalEmbeddingIndex.search` | Truy vấn smoke test trả về đủ 2 kết quả | Chạy lệnh kiểm tra Phase 3 |
@@ -55,7 +55,8 @@ Benchmark được tạo theo thứ tự ổn định của `paper_id`. Trước
 - `summary`: ground truth là câu đầu tiên của summary;
 - `authors`: ground truth là `authors_joined`;
 - `date`: ground truth là ngày `published`;
-- `categories`: ground truth là `categories_joined`.
+- `category`: ground truth là `categories_joined`.
+- `multi_hop`: ground truth kết nối category của hai tài liệu có DOI nguồn rõ ràng.
 
 Mỗi câu chứa tiêu đề bài báo trong dấu nháy và DOI trong `ground_truth_doc_ids`. Thiết kế này giúp retrieval vừa tìm kiếm ngữ nghĩa vừa có thể đối chiếu chính xác tài liệu kỳ vọng. `load_or_create_test_set` giữ nguyên bộ benchmark nếu file đã tồn tại, để baseline, corrupted và repaired được đánh giá trên cùng đề thi.
 

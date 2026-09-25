@@ -40,7 +40,7 @@ Phase 2 tạo clean-data contract cho benchmark, embedding và baseline pipeline
 | Dựng clean dataframe và embedding text | `src/ingestion/cleaning.py`, `data/clean/papers_clean.json` | 24 DOI unique, 16 cột canonical | `build_clean_dataframe()` trả 24 dòng |
 | Chạy GX 1.x ephemeral | `src/observability/quality.py`, baseline quality report | Baseline quality/freshness PASS | `run_data_quality_checks(..., "test")['success']` là `True` |
 | Rebuild dữ liệu repaired từ raw, không vá dataframe lỗi | `corruption_flow.py`, `papers_clean_repaired.json` | Repaired có 24 dòng, quality/freshness PASS | Chạy `python script/run_corruption_flow.py` |
-| Báo cáo ba trạng thái | `data/reports/corruption_report.md` | So sánh chung một test set 5 câu | Đối chiếu report với JSON metrics trong `data/results/` |
+| Báo cáo ba trạng thái | `data/reports/corruption_report.md` | So sánh chung một test set 10 câu | Đối chiếu report với JSON metrics trong `data/results/` |
 
 Output tiêu biểu là `data/quality/corrupted_quality_report.json`. Artifact này cho thấy corrupted state vẫn có 24 dòng nhưng FAIL: DOI unique có 10 giá trị unexpected (5 DOI xuất hiện hai lần), summary length có 4 summary rỗng và freshness có 8/24 bài cũ hơn 180 ngày (33.33%). Vì vậy, chỉ kiểm tra số dòng không đủ để khẳng định dữ liệu sạch.
 
@@ -114,8 +114,8 @@ python script/run_corruption_flow.py
 1. **Từ Crossref đến vector index:** Response được parse thành `PaperRecord`; khi không có mạng, snapshot thay API. Cleaning chuẩn hóa, deduplicate, tính `age_days`, dựng `text_for_embedding`. Sau Quality Gate, Chroma index embed trường này bằng MiniLM và lưu metadata DOI, title, authors, published, category, summary.
 2. **Evaluation set và ground-truth IDs:** Mỗi sample có câu hỏi, đáp án chuẩn và `ground_truth_doc_ids`. Retrieval hit được tính khi DOI đúng nằm trong top-k; Token F1 so answer với ground truth; LLM judge chấm answer quality. DOI giúp phép đo không phụ thuộc thứ tự dòng.
 3. **Quality checks và freshness:** GX kiểm tra cấu trúc/nội dung: số dòng, null, duplicate DOI, summary ngắn. Freshness đo tỷ lệ bài quá 180 ngày. Dữ liệu có thể valid về schema nhưng vẫn cũ, nên cần cả hai signal.
-4. **Cùng test set cho ba trạng thái:** Nếu benchmark đổi giữa các lần chạy, khác biệt metric có thể đến từ câu hỏi chứ không phải corruption/repair. Giữ nguyên `test_set.json` làm phép so sánh công bằng.
-5. **Tiêu chí repair thành công:** Repaired phải được tạo từ raw source, sinh đủ artifact riêng, GX PASS, freshness PASS và đưa metrics về baseline. Hiện tại: 24 repaired records, stale ratio 0%, Token F1 0.8370 và judge score 4.4 đều khớp baseline.
+4. **Cùng test set cho ba trạng thái:** Nếu benchmark đổi giữa các lần chạy, khác biệt metric có thể đến từ câu hỏi chứ không phải corruption/repair. Giữ nguyên `test_set.json` gồm 10 câu làm phép so sánh công bằng.
+5. **Tiêu chí repair thành công:** Repaired phải được tạo từ raw source, sinh đủ artifact riêng, GX PASS, freshness PASS và đưa metrics về baseline. Hiện tại: 24 repaired records, stale ratio 0%, Token F1 0.7403 và judge score 3.8 đều khớp baseline.
 
 ## 8. Phân tích kết quả
 
@@ -123,27 +123,27 @@ python script/run_corruption_flow.py
 
 | Metric/signal | Baseline | Corrupted | Repaired | Nhận xét của cá nhân |
 | --- | ---: | ---: | ---: | --- |
-| `retrieval_hit_rate` | 1.0000 | 1.0000 | 1.0000 | Hit rate không giảm ở 5 câu hiện tại; chỉ số này một mình chưa phát hiện silent failure. |
-| `mean_token_f1` | 0.8370 | 0.6370 | 0.8370 | Corruption giảm 0.2000 (20 điểm phần trăm); repair khôi phục đúng baseline. |
-| `judge_accuracy` | 0.8000 | 0.6000 | 0.8000 | Tỷ lệ answer đạt tiêu chí judge giảm 20 điểm phần trăm rồi phục hồi. |
-| `mean_judge_score` | 4.4000 | 3.8000 | 4.4000 | Chất lượng answer giảm 0.6/5 rồi phục hồi. |
+| `retrieval_hit_rate` | 1.0000 | 0.8000 | 1.0000 | Corruption giảm 0.2000; repair khôi phục đúng baseline. |
+| `mean_token_f1` | 0.7403 | 0.5403 | 0.7403 | Corruption giảm 0.2000 (20 điểm phần trăm); repair khôi phục đúng baseline. |
+| `judge_accuracy` | 0.7000 | 0.5000 | 0.7000 | Tỷ lệ answer đạt tiêu chí judge giảm 20 điểm phần trăm rồi phục hồi. |
+| `mean_judge_score` | 3.8000 | 3.0000 | 3.8000 | Chất lượng answer giảm 0.8/5 rồi phục hồi. |
 | Quality checks | PASS | FAIL | PASS | Corrupted fail DOI uniqueness và summary length; repaired pass toàn bộ. |
 | Freshness status | PASS, 0/24 stale | FAIL, 8/24 stale (33.33%) | PASS, 0/24 stale | Freshness phát hiện stale-date injection vượt SLA 25%. |
 
-Các số liệu lấy từ `baseline_metrics.json`, `corrupted_metrics.json`, `repaired_metrics.json`, quality reports và `corruption_report.md` của cùng bộ test 5 câu.
+Các số liệu lấy từ `baseline_metrics.json`, `corrupted_metrics.json`, `repaired_metrics.json`, quality reports và `corruption_report.md` của cùng bộ test 10 câu.
 
 ### Kết luận từ số liệu
 
-1. **Blank summaries + duplicate DOI + stale dates** → GX fail (unique DOI, summary length) và freshness FAIL (33.33% > 25%) → dù hit rate vẫn 1.0, Token F1 giảm 0.8370 xuống 0.6370, judge accuracy giảm 0.8 xuống 0.6. Đây là silent failure: hệ thống vẫn trả lời nhưng answer quality đã suy giảm.
-2. **Rebuild từ `crossref_records.json` bằng `build_clean_dataframe`** → GX PASS và freshness về 0% stale → Token F1, judge accuracy và judge score phục hồi về 0.8370, 0.8 và 4.4; hit rate giữ 1.0.
+1. **Blank summaries + duplicate DOI + stale dates** → GX fail (unique DOI, summary length) và freshness FAIL (33.33% > 25%) → Retrieval Hit Rate giảm từ 1.0 xuống 0.8, Token F1 giảm từ 0.7403 xuống 0.5403, judge accuracy giảm từ 0.7 xuống 0.5. Đây là silent failure: hệ thống vẫn trả lời nhưng chất lượng đã suy giảm.
+2. **Rebuild từ `crossref_records.json` bằng `build_clean_dataframe`** → GX PASS và freshness về 0% stale → Retrieval Hit Rate, Token F1, judge accuracy và judge score phục hồi về baseline 1.0, 0.7403, 0.7 và 3.8.
 
 **Corruption nào ảnh hưởng rõ nhất và vì sao?**
 
-Trong lần chạy này, nhóm lỗi blank summary, duplicate rows và noise ảnh hưởng rõ nhất đến F1/judge; stale date có signal freshness rõ nhất với 8/24 bản ghi vượt ngưỡng. Không nên quy toàn bộ F1 giảm cho một scenario vì 6 scenario được áp dụng cùng lúc trên state corrupted và test set chỉ có 5 câu.
+Trong lần chạy này, nhóm lỗi blank summary, duplicate rows và noise ảnh hưởng rõ nhất đến F1/judge; stale date có signal freshness rõ nhất với 8/24 bản ghi vượt ngưỡng. Không nên quy toàn bộ F1 giảm cho một scenario vì 6 scenario được áp dụng cùng lúc trên state corrupted và test set có 10 câu.
 
 **Kết quả nào khác với kỳ vọng ban đầu?**
 
-Kỳ vọng trực giác là retrieval hit rate cũng sẽ giảm sau corruption, nhưng thực tế giữ 1.0. Khả năng cao là năm câu benchmark vẫn có DOI ground truth còn trong collection hoặc câu hỏi dùng title giúp exact lookup. Vì benchmark quá nhỏ, report dùng đồng thời Quality Gate, freshness, Token F1 và judge score thay vì suy luận từ hit rate duy nhất.
+Với test set 10 câu, retrieval hit rate đã giảm từ 1.0 xuống 0.8 sau corruption và quay về 1.0 sau repair. Tuy vậy, report vẫn dùng đồng thời Quality Gate, freshness, Token F1 và judge score thay vì suy luận từ một metric duy nhất.
 
 ## 9. Điều học được và hướng cải thiện
 

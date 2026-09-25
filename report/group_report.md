@@ -13,20 +13,20 @@
 
 | STT | Họ và tên | MSSV | Vai trò chính | Pha và deliverable sở hữu |
 | --: | --- | --- | --- | --- |
-| 1 | Nguyễn Đình Khang | 2A202602584 | Trưởng nhóm; ingestion, cleaning, observability | **Pha 2:** `crossref.py`, `cleaning.py`, `quality.py`; ở **Pha 6:** xác nhận contract quality/freshness và rebuilt data từ raw |
+| 1 | Nguyễn Đình Khang | 2A202602584 | Trưởng nhóm; ingestion, cleaning, observability | **Pha 2** và phối hợp **Pha 6:** `crossref.py`, `cleaning.py`, `quality.py`; safe repair, quality/freshness và đối chiếu ba trạng thái |
 | 2 | Phạm Hồ Quang Dũng | 2A202602860 | Benchmark & vector index | **Pha 3:** `evaluation/testset.py`, ChromaDB/MiniLM index, smoke test retrieval |
 | 3 | Ngô Gia Quốc | 2A202602757 | Baseline integration & reporting | **Pha 4:** `pipelines/phase1.py`, baseline evaluation/report, tích hợp artifact và portability khi load index |
-| 4 | Trần Long Khánh | 2A202602538 | Corruption, repair orchestration & integration review | **Pha 5–6:** `ingestion/corruption.py`, `pipelines/corruption_flow.py`, `generate_corruption_report()` và nghiệm thu flow |
+| 4 | Trần Long Khánh | 2A202602538 | Corruption, repair orchestration & integration review | **Pha 5** và phối hợp **Pha 6:** `ingestion/corruption.py`, `pipelines/corruption_flow.py`, `generate_corruption_report()` và nghiệm thu flow |
 
-Phân công Pha 6 được tách rõ: Khánh sở hữu orchestration/corruption/comparison; Khang sở hữu các rule chất lượng và contract raw-to-repaired mà flow dùng để xác minh repair. Vì vậy không ghi cả hai thành viên là owner của cùng một hàm orchestration.
+Pha 6 do Nguyễn Đình Khang và Trần Long Khánh phối hợp: Khang phụ trách contract raw-to-repaired, quality/freshness và đối chiếu ba trạng thái; Khánh phụ trách orchestration, corruption/comparison và nghiệm thu integration. Hai phần bổ trợ nhau trong cùng repair flow.
 
 ## 2. Tóm tắt kết quả
 
-Nhóm hoàn thiện pipeline RAG data observability theo chuỗi Crossref → clean data → Great Expectations/freshness → ChromaDB → benchmark/evaluation → corruption → repair. Dữ liệu nguồn có 24 raw records và sau cleaning còn 24 clean records. Baseline tạo được CSV/JSON sạch, manifest embedding, collection `papers-baseline`, test set 5 câu, metrics/answers, quality/freshness reports và `phase1_report.md`.
+Nhóm hoàn thiện pipeline RAG data observability theo chuỗi Crossref → clean data → Great Expectations/freshness → ChromaDB → benchmark/evaluation → corruption → repair. Dữ liệu nguồn có 24 raw records và sau cleaning còn 24 clean records. Baseline tạo được CSV/JSON sạch, manifest embedding, collection `papers-baseline`, test set 10 câu, metrics/answers, quality/freshness reports và `phase1_report.md`.
 
-Thử nghiệm corruption chủ động tạo sáu lỗi: bỏ bản ghi mới, summary rỗng, noise trong embedding text, title bị cắt, ngày stale và DOI trùng. Dù corrupted corpus vẫn có 24 dòng và Retrieval Hit Rate vẫn là 1.0 trên benchmark hiện tại, Quality Gate FAIL, freshness FAIL với 8/24 bài stale (33.33%), Token F1 giảm từ 0.8370 xuống 0.6370 và judge score giảm từ 4.4 xuống 3.8. Điều này chứng minh một metric retrieval đơn lẻ không đủ để phát hiện silent failure.
+Thử nghiệm corruption chủ động tạo sáu lỗi: bỏ bản ghi mới, summary rỗng, noise trong embedding text, title bị cắt, ngày stale và DOI trùng. Corrupted corpus vẫn có 24 dòng nhưng Quality Gate FAIL, freshness FAIL với 8/24 bài stale (33.33%), Retrieval Hit Rate giảm từ 1.0 xuống 0.8, Token F1 giảm từ 0.7403 xuống 0.5403 và judge score giảm từ 3.8 xuống 3.0.
 
-Repair không patch dữ liệu lỗi tại chỗ mà dựng lại clean dataframe từ raw records đã lưu. Sau repair, GX/freshness đều PASS và các metrics quay về đúng baseline. Giới hạn chính còn lại là benchmark chỉ có 5 câu, một số câu chứa nguyên title nên có thể làm hit rate lạc quan; Ragas chưa chạy vì `RUN_RAGAS` chưa được bật.
+Repair không patch dữ liệu lỗi tại chỗ mà dựng lại clean dataframe từ raw records đã lưu. Sau repair, GX/freshness đều PASS và các metrics quay về đúng baseline. Benchmark hiện có 10 câu source-grounded; Ragas chưa chạy vì `RUN_RAGAS` chưa được bật.
 
 ## 3. Kiến trúc và luồng dữ liệu
 
@@ -50,10 +50,10 @@ Crossref REST API / local snapshot
 | --- | --- | --- | --- | --- |
 | Ingestion | Crossref `/works` hoặc snapshot | Retry, fallback offline, parse DOI/text/date/authors/category | `data/raw/crossref_response.json`, `crossref_records.json` | Nguyễn Đình Khang — Pha 2 |
 | Cleaning | `PaperRecord` | Normalize, loại record thiếu trường bắt buộc, deduplicate DOI, `age_days`, embedding text | `data/clean/papers_clean.csv/.json` | Nguyễn Đình Khang — Pha 2 |
-| Observability | Clean/corrupted/repaired DataFrame | GX 1.x ephemeral và Freshness SLA | `data/quality/*quality_report.json`, `*freshness_report.json` | Nguyễn Đình Khang — Pha 2; dùng để xác minh Pha 6 |
+| Observability | Clean/corrupted/repaired DataFrame | GX 1.x ephemeral và Freshness SLA | `data/quality/*quality_report.json`, `*freshness_report.json` | Nguyễn Đình Khang — Pha 2; phối hợp Pha 6 |
 | Benchmark/index | Clean dataframe | Sinh test set source-grounded; MiniLM + Chroma cosine index | `data/eval/test_set.json`, `data/embeddings/`, `data/chroma/` | Phạm Hồ Quang Dũng — Pha 3 |
 | Baseline orchestration | Các output Pha 2–3 | Quality trước index, evaluate, report baseline | `baseline_metrics.json`, `baseline_answers.json`, `phase1_report.md` | Ngô Gia Quốc — Pha 4 |
-| Corruption/repair | Clean/raw data + fixed test set | Tiêm 6 lỗi, re-index/evaluate, rebuild từ raw, compare | Corrupted/repaired artifacts, `corruption_log.json`, `corruption_report.md` | Trần Long Khánh — Pha 5–6 |
+| Corruption/repair | Clean/raw data + fixed test set | Tiêm 6 lỗi, re-index/evaluate, rebuild từ raw, compare | Corrupted/repaired artifacts, `corruption_log.json`, `corruption_report.md` | Trần Long Khánh — Pha 5; Nguyễn Đình Khang & Trần Long Khánh — Pha 6 |
 
 ## 4. Cách tái hiện kết quả
 
@@ -68,7 +68,7 @@ Crossref REST API / local snapshot
 | Crossref records tối đa | 24 |
 | Retrieval `top_k` | 4 |
 | Freshness threshold | 180 ngày; stale ratio tối đa 25% |
-| Test set | 5 câu fixed-source; không random seed |
+| Test set | 10 câu fixed-source; không random seed |
 
 API key chỉ nằm trong `.env` local và không xuất hiện trong report hoặc artifact.
 
@@ -157,8 +157,8 @@ Test set phải giữ nguyên để mọi khác biệt metric chỉ đến từ 
 | Raw response/records | `data/raw/crossref_response.json`, `crossref_records.json` | Có | 24 records chuẩn hóa |
 | Cleaned dataset | `data/clean/papers_clean.csv/.json` | Có | 24 clean records |
 | Embedding manifest/index | `data/embeddings/papers_embeddings.json`, `data/chroma/` | Có | Collection `papers-baseline` |
-| Evaluation set | `data/eval/test_set.json` | Có | 5 câu, DOI ground truth |
-| Baseline metrics | `data/results/baseline_metrics.json` | Có | Judge mode `llm` |
+| Evaluation set | `data/eval/test_set.json` | Có | 10 câu, DOI ground truth |
+| Baseline metrics | `data/results/baseline_metrics.json` | Có | Judge mode `fallback_heuristic` |
 | Quality/freshness | `data/quality/baseline_quality_report.json`, `freshness_report.json` | Có | GX PASS, Freshness PASS |
 | Baseline report | `data/reports/phase1_report.md` | Có | Generated 2026-09-25 |
 
@@ -166,10 +166,10 @@ Test set phải giữ nguyên để mọi khác biệt metric chỉ đến từ 
 
 | Metric | Giá trị | Diễn giải |
 | --- | ---: | --- |
-| `retrieval_hit_rate` | 1.0000 | DOI ground truth xuất hiện trong top-4 cho 5 samples hiện tại |
-| `mean_token_f1` | 0.8370 | Mốc answer quality của clean corpus |
-| `judge_accuracy` | 0.8000 | Tỷ lệ answer đạt judge criterion |
-| `mean_judge_score` | 4.4000 / 5 | Điểm judge trung bình ở baseline |
+| `retrieval_hit_rate` | 1.0000 | DOI ground truth xuất hiện trong top-4 cho 10 samples hiện tại |
+| `mean_token_f1` | 0.7403 | Mốc answer quality của clean corpus |
+| `judge_accuracy` | 0.7000 | Tỷ lệ answer đạt judge criterion |
+| `mean_judge_score` | 3.8000 / 5 | Điểm judge trung bình ở baseline |
 | Ragas | Chưa chạy | `RUN_RAGAS` chưa được bật vì pass này chậm hơn |
 
 ## 8. Data quality và freshness
@@ -214,16 +214,16 @@ Repair bỏ hẳn corrupted dataframe và gọi lại `load_raw_records()` + `bu
 
 | Metric/signal | Baseline | Corrupted | Repaired | Thay đổi do corruption | Mức phục hồi | Nhận xét |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| `retrieval_hit_rate` | 1.0000 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | Không giảm trên 5 câu hiện tại; không dùng một mình để kết luận corpus tốt |
-| `mean_token_f1` | 0.8370 | 0.6370 | 0.8370 | -0.2000 | +0.2000 | Answer quality giảm 20 điểm phần trăm và trở lại baseline |
-| `judge_accuracy` | 0.8000 | 0.6000 | 0.8000 | -0.2000 | +0.2000 | Judge signal suy giảm rồi phục hồi |
-| `mean_judge_score` | 4.4000 | 3.8000 | 4.4000 | -0.6000 | +0.6000 | Mức độ đúng của answer giảm 0.6/5 |
+| `retrieval_hit_rate` | 1.0000 | 0.8000 | 1.0000 | -0.2000 | +0.2000 | Retrieval suy giảm rồi phục hồi trên benchmark 10 câu |
+| `mean_token_f1` | 0.7403 | 0.5403 | 0.7403 | -0.2000 | +0.2000 | Answer quality giảm 20 điểm phần trăm và trở lại baseline |
+| `judge_accuracy` | 0.7000 | 0.5000 | 0.7000 | -0.2000 | +0.2000 | Judge signal suy giảm rồi phục hồi |
+| `mean_judge_score` | 3.8000 | 3.0000 | 3.8000 | -0.8000 | +0.8000 | Mức độ đúng của answer giảm 0.8/5 |
 | Quality Gate | PASS | FAIL | PASS | PASS → FAIL | FAIL → PASS | Corrupted fail unique DOI và summary length |
 | Freshness SLA | PASS, 0.00% stale | FAIL, 33.33% stale | PASS, 0.00% stale | +33.33 pp stale | -33.33 pp stale | Stale-date scenario vượt SLA |
 
 Hai kết luận nhân quả được artifacts hỗ trợ:
 
-1. Sáu corruption cùng làm thay đổi content/date/identity → GX FAIL và freshness FAIL → Token F1 giảm 0.2000, judge accuracy giảm 0.2000, judge score giảm 0.6000. Hit rate không đổi, cho thấy silent failure không thể bị phát hiện chỉ bằng hit rate.
+1. Sáu corruption cùng làm thay đổi content/date/identity → GX FAIL và freshness FAIL → Retrieval Hit Rate, Token F1 và judge accuracy cùng giảm 0.2000; judge score giảm 0.8000. Các signal chất lượng và evaluation cùng xác nhận silent failure.
 2. Rebuild từ `data/raw/crossref_records.json` qua canonical cleaning → Quality Gate/Freshness trở lại PASS → Token F1, judge accuracy và judge score phục hồi đúng baseline.
 
 ## 11. Vấn đề tích hợp quan trọng
@@ -231,13 +231,13 @@ Hai kết luận nhân quả được artifacts hỗ trợ:
 - **Triệu chứng:** Một benchmark artifact cũ có thể trỏ đến DOI không còn thuộc clean corpus mới, dẫn tới evaluation trả metric thấp hoặc vô nghĩa dù pipeline không ném exception.
 - **Nguyên nhân:** `load_or_create_test_set()` có thể tái dùng file test set đã tồn tại; nếu raw source được refresh thì document identity/title thay đổi.
 - **Cách xử lý:** Sau khi load/build test set, `phase1.py` thu tập mọi `ground_truth_doc_ids` và so với `paper_id` trong clean dataframe. Nếu không phải tập con, pipeline rebuild test set với `refresh=True` trước evaluation.
-- **Cách xác minh:** Artifact hiện tại có 5 samples với DOI ground truth thuộc clean corpus; baseline `retrieval_hit_rate = 1.0` và `data/eval/test_set.json` được dùng lại cho cả three-state comparison.
+- **Cách xác minh:** Artifact hiện tại có 10 samples với DOI ground truth thuộc clean corpus; baseline `retrieval_hit_rate = 1.0` và `data/eval/test_set.json` được dùng lại cho cả three-state comparison.
 
 ## 12. Giới hạn và hướng cải thiện
 
 | Giới hạn hiện tại | Ảnh hưởng | Hướng cải thiện có thể kiểm chứng |
 | --- | --- | --- |
-| Test set chỉ có 5 câu; nhiều câu chứa title | Hit rate 1.0 có thể lạc quan, khó thấy tác động drop records | Thêm câu paraphrase Việt/Anh không chứa title; so sánh hit/F1/judge theo nhóm câu hỏi |
+| Test set mới có 10 câu nhưng nhiều câu vẫn chứa title | Hit rate có thể lạc quan với câu truy vấn exact-title | Thêm câu paraphrase Việt/Anh không chứa title; so sánh hit/F1/judge theo nhóm câu hỏi |
 | Sáu scenario chạy cùng lúc | Không tách được mức ảnh hưởng của từng lỗi lên F1/judge | Chạy ablation: mỗi scenario một lần, sau đó chạy tổ hợp; ghi metric theo scenario |
 | Ragas chưa chạy | Chưa có một lớp đánh giá RAG bổ sung | Chạy với `RUN_RAGAS=1`; lưu score/error và thời gian chạy trong report |
 | Snapshot offline có thể cũ | Pipeline vẫn chạy nhưng corpus có thể không mới | Theo dõi `latest_published`, stale ratio và refresh snapshot có kiểm soát |
@@ -245,7 +245,7 @@ Hai kết luận nhân quả được artifacts hỗ trợ:
 ## 13. Checklist trước khi nộp
 
 - [x] Thông tin nhóm và repository chính xác.
-- [x] Phân công khớp với module, artifact và kết quả thực tế; Pha 6 phân biệt owner orchestration với owner quality contract.
+- [x] Phân công khớp với module, artifact và kết quả thực tế; Pha 6 do Nguyễn Đình Khang và Trần Long Khánh phối hợp theo phần việc quality/repair và orchestration/integration.
 - [x] Baseline và corruption flow có artifact thành công ngày 2026-09-25.
 - [x] Baseline, corrupted và repaired dùng cùng `data/eval/test_set.json`.
 - [x] Bảng metrics khớp các file trong `data/results/` hiện tại.
