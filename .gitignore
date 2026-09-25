@@ -6,3 +6,7 @@ src/*.egg-info/
 lab/
 **/__pycache__/
 doc_verification_report.md
+
+# ChromaDB is rebuilt locally by the pipeline; keep only the folder placeholder
+data/chroma/*
+!data/chroma/.gitkeep
