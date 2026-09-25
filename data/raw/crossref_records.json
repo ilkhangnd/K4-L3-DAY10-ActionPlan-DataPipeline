@@ -32,21 +32,6 @@
     "comment": "Crossref record 10.47576/2949-1894.2026.7.7.023"
   },
   {
-    "paper_id": "10.70267/aitia.2026482489",
-    "title": "Retrieval-Augmented Generation for Large Language Model-Based Intelligent Assistants: A Review",
-    "summary": "Large language models have accelerated the development of intelligent assistants by providing flexible natural- language understanding and generation. However, hallucination, knowledge staleness, and limited coverage of domain-specific information continue to restrict their reliability in knowledge-intensive tasks. This review examines how Retrieval -Augmented Generation (RAG) can strengthen LLM-based intelligent assistants by connecting generative capability with external, maintainable knowledge. It synthesi zes research on the technical foundations of RAG, key components and optimization strategies, and applications and challenges in intelligent-assistant settings. The review finds that RAG can improve knowledge accuracy and timeliness by grounding responses in retrieved evidence and allowing knowledge resources to be updated independently of the base model. These benefits are conditional: unreliable retrieval, poorly maintained sources, ineffective use of context, and fragmented evaluation can still produce u nsupported or unsafe answers. Reliable deployment, therefore, requires coordinated retrieval quality, knowledge management, generation control, and trustworthy evaluation. Future RAG-based assistants should combine these capabilities to become scalable, secure, evidence-aware, and verifiable systems.",
-    "authors": [
-      "Zilang Shao"
-    ],
-    "categories": [],
-    "primary_category": "Uncategorized",
-    "published": "2026-09-13",
-    "updated": "2026-09-13",
-    "abs_url": "https://doi.org/10.70267/aitia.2026482489",
-    "pdf_url": "https://journals.zeuspress.org/index.php/conference/article/download/1352/1280",
-    "comment": "Crossref record 10.70267/aitia.2026482489"
-  },
-  {
     "paper_id": "10.54254/2755-2721/2026.36624",
     "title": "Advances in Reinforcement Learning for Retrieval-Augmented Generation in Large Language Model",
     "summary": "Retrieval-augmented generation (RAG) enhances large language models (LLMs) by incorporating external information, but traditional fixed retrieval processes struggle to adapt to complex task requirements. In recent years, reinforcement learning (RL) has been increasingly applied to train LLMs to autonomously invoke search tools, driving RAG to evolve from the passive information acquisition of a fixed pipeline to a trustworthy retrieval system with autonomous decision-making capabilities. This paper reviews the representative studies on the combination of LLMs, RAG and RL in recent years. It focuses on analyzing the role of RL in dynamic retrieval, process rewards, query optimization, etc., and compares the connections and evolutionary relationships among different methods. The research findings show that RL has gradually expanded from simply improving the accuracy of the final answer to optimizing queries, multi-round search, process decision-making and trustworthy screening, providing new ideas for enhancing the active retrieval ability of RAG and improving the credibility of information.",
@@ -60,6 +45,21 @@
     "abs_url": "https://doi.org/10.54254/2755-2721/2026.36624",
     "pdf_url": "https://doi.org/10.54254/2755-2721/2026.36624",
     "comment": "Crossref record 10.54254/2755-2721/2026.36624"
+  },
+  {
+    "paper_id": "10.70267/aitia.2026482489",
+    "title": "Retrieval-Augmented Generation for Large Language Model-Based Intelligent Assistants: A Review",
+    "summary": "Large language models have accelerated the development of intelligent assistants by providing flexible natural- language understanding and generation. However, hallucination, knowledge staleness, and limited coverage of domain-specific information continue to restrict their reliability in knowledge-intensive tasks. This review examines how Retrieval -Augmented Generation (RAG) can strengthen LLM-based intelligent assistants by connecting generative capability with external, maintainable knowledge. It synthesi zes research on the technical foundations of RAG, key components and optimization strategies, and applications and challenges in intelligent-assistant settings. The review finds that RAG can improve knowledge accuracy and timeliness by grounding responses in retrieved evidence and allowing knowledge resources to be updated independently of the base model. These benefits are conditional: unreliable retrieval, poorly maintained sources, ineffective use of context, and fragmented evaluation can still produce u nsupported or unsafe answers. Reliable deployment, therefore, requires coordinated retrieval quality, knowledge management, generation control, and trustworthy evaluation. Future RAG-based assistants should combine these capabilities to become scalable, secure, evidence-aware, and verifiable systems.",
+    "authors": [
+      "Zilang Shao"
+    ],
+    "categories": [],
+    "primary_category": "Uncategorized",
+    "published": "2026-09-13",
+    "updated": "2026-09-13",
+    "abs_url": "https://doi.org/10.70267/aitia.2026482489",
+    "pdf_url": "https://journals.zeuspress.org/index.php/conference/article/download/1352/1280",
+    "comment": "Crossref record 10.70267/aitia.2026482489"
   },
   {
     "paper_id": "10.20944/preprints202604.0339.v1",
@@ -134,6 +134,22 @@
     "comment": "Crossref record 10.7717/peerj-cs.3882"
   },
   {
+    "paper_id": "10.55041/isjem07213",
+    "title": "Speculative Retrieval-Augmented Generation for Cost-Efficient Large Language Model Inference",
+    "summary": "Abstract - This work focuses on the two crucial bottlenecks in Retrieval-Augmented Generation (RAG): high inference latency and expensive computation cost. RAG enhances the factual correctness of Large Language Models (LLMs) by utilizing external knowledge sources; However, the auto-To achieve a good recall, the system applies a two-way retrieval mechanism: Dense retrieval: This module uses BAAI/bge-small-en-v1.5 to create a 384-dimensional embedding space, where queries and documents are mapped. The embeddings are stored in a FAISS IndexFlatL2. Sparse retrieval: This module uses TF-IDF vectorization to capture an exact keyword match. Reranking: A simple heuristic mechanism of matching substrings of the query terms in the documents selected to perform the final step of ranking them for prompt introduce a novel speculative RAG framework that combines hybrid retrieval with speculative decoding. Our framework employs hybrid dense vector search (BGE-small) and sparse keyword search (TF-IDF) for enhanced recall followed by a lightweight re-ranker model. A compact draft model (TinyLlama-1.1B) makes tentative future token generation, then a larger verifier model (Mistral-7B) checks the correctness of the candidate token. Empirical experiments demonstrate 33% and 29% improvement in inference latency and token reduction, respectively, compared to the baseline of a typical 7B model, while retaining 94% accuracy on factoid tasks. Key Words: Retrieval-Augmented Generation, Speculative Decoding, Large Language Models, Inference Optimization, Hybrid Retrieval",
+    "authors": [
+      "Dr. Sumalatha P",
+      "Manoj Kumar"
+    ],
+    "categories": [],
+    "primary_category": "Uncategorized",
+    "published": "2026-05-06",
+    "updated": "2026-05-06",
+    "abs_url": "https://doi.org/10.55041/isjem07213",
+    "pdf_url": "https://doi.org/10.55041/isjem07213",
+    "comment": "Crossref record 10.55041/isjem07213"
+  },
+  {
     "paper_id": "10.21079/11681/50309",
     "title": "Microsoft Azure artificial intelligence / machine learning hackathon for development of retrieval-augmented generation large language model",
     "summary": "The US Army Corps of Engineers (USACE) Civil Works (CW) research and development (R&D) mission is to address challenging environmental sustainability problems through innovative science and engineering, which helps to ensure a safer, more prosperous, and more resilient nation. To achieve this, the US Army Engineer Research and Development Center (ERDC) plans, executes, leads, and directs many R&D programs in coordination with USACE Headquarters, Districts, and Divisions through its multiple strategic focus areas, which include infrastructure, water modeling, crisis preparedness, ecosystem, sediment management, data, artificial intelligence, and robotics. In this process, much information is generated, including internal progress reviews, financial reports, scopes of work, work package planning, and success stories.",
@@ -151,22 +167,6 @@
     "abs_url": "https://doi.org/10.21079/11681/50309",
     "pdf_url": "https://doi.org/10.21079/11681/50309",
     "comment": "Crossref record 10.21079/11681/50309"
-  },
-  {
-    "paper_id": "10.55041/isjem07213",
-    "title": "Speculative Retrieval-Augmented Generation for Cost-Efficient Large Language Model Inference",
-    "summary": "Abstract - This work focuses on the two crucial bottlenecks in Retrieval-Augmented Generation (RAG): high inference latency and expensive computation cost. RAG enhances the factual correctness of Large Language Models (LLMs) by utilizing external knowledge sources; However, the auto-To achieve a good recall, the system applies a two-way retrieval mechanism: Dense retrieval: This module uses BAAI/bge-small-en-v1.5 to create a 384-dimensional embedding space, where queries and documents are mapped. The embeddings are stored in a FAISS IndexFlatL2. Sparse retrieval: This module uses TF-IDF vectorization to capture an exact keyword match. Reranking: A simple heuristic mechanism of matching substrings of the query terms in the documents selected to perform the final step of ranking them for prompt introduce a novel speculative RAG framework that combines hybrid retrieval with speculative decoding. Our framework employs hybrid dense vector search (BGE-small) and sparse keyword search (TF-IDF) for enhanced recall followed by a lightweight re-ranker model. A compact draft model (TinyLlama-1.1B) makes tentative future token generation, then a larger verifier model (Mistral-7B) checks the correctness of the candidate token. Empirical experiments demonstrate 33% and 29% improvement in inference latency and token reduction, respectively, compared to the baseline of a typical 7B model, while retaining 94% accuracy on factoid tasks. Key Words: Retrieval-Augmented Generation, Speculative Decoding, Large Language Models, Inference Optimization, Hybrid Retrieval",
-    "authors": [
-      "Dr. Sumalatha P",
-      "Manoj Kumar"
-    ],
-    "categories": [],
-    "primary_category": "Uncategorized",
-    "published": "2026-05-06",
-    "updated": "2026-05-06",
-    "abs_url": "https://doi.org/10.55041/isjem07213",
-    "pdf_url": "https://doi.org/10.55041/isjem07213",
-    "comment": "Crossref record 10.55041/isjem07213"
   },
   {
     "paper_id": "10.2196/preprints.106157",

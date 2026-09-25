@@ -196,6 +196,21 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ## 6. QUY TẮC PHỐI HỢP & CHECKLIST TRƯỚC KHI NỘP BÀI
 
+### Dashboard review CP5/CP6
+
+Sau khi chạy hai pipeline, mở dashboard để đối chiếu metrics, quality/freshness,
+6 corruption scenarios, bằng chứng idempotency và toàn bộ artifact nộp bài:
+
+```bash
+uv run streamlit run streamlit_app.py
+```
+
+Kiểm tra nghiệm thu tự động trước khi nộp:
+
+```bash
+uv run python script/verify_submission.py
+```
+
 ### 👥 Phân chia vai trò gợi ý (Nhóm 4 thành viên):
 - **Thành viên 1 (Pipeline Lead & Integrator):** Điều phối luồng, quản lý cấu hình `core/`, kết nối `phase1.py` và `corruption_flow.py`.
 - **Thành viên 2 (Data Foundation Owner):** Phụ trách thu thập `crossref.py`, làm sạch `cleaning.py` và khôi phục dữ liệu từ Raw.

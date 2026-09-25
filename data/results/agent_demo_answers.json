@@ -1,0 +1,5 @@
+[
+  {
+    "error": "Agent demo skipped: GOOGLE_API_KEY is required when LLM_PROVIDER=gemini."
+  }
+]

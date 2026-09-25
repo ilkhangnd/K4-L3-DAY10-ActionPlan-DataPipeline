@@ -32,13 +32,17 @@ class Paths:
     gx_dir: Path
     baseline_quality_report: Path
     corrupted_quality_report: Path
+    repaired_quality_report: Path
     freshness_report: Path
+    corrupted_freshness_report: Path
+    repaired_freshness_report: Path
     baseline_report: Path
     corruption_log: Path
     corrupted_metrics: Path
     corrupted_answers: Path
     repaired_metrics: Path
     repaired_answers: Path
+    repair_verification: Path
     comparison_report: Path
 
     @property
@@ -107,13 +111,17 @@ def load_settings(project_dir: Path | None = None) -> Settings:
         gx_dir=data_dir / "quality" / "gx",
         baseline_quality_report=data_dir / "quality" / "baseline_quality_report.json",
         corrupted_quality_report=data_dir / "quality" / "corrupted_quality_report.json",
+        repaired_quality_report=data_dir / "quality" / "repaired_quality_report.json",
         freshness_report=data_dir / "quality" / "freshness_report.json",
+        corrupted_freshness_report=data_dir / "quality" / "corrupted_freshness_report.json",
+        repaired_freshness_report=data_dir / "quality" / "repaired_freshness_report.json",
         baseline_report=data_dir / "reports" / "phase1_report.md",
         corruption_log=data_dir / "results" / "corruption_log.json",
         corrupted_metrics=data_dir / "results" / "corrupted_metrics.json",
         corrupted_answers=data_dir / "results" / "corrupted_answers.json",
         repaired_metrics=data_dir / "results" / "repaired_metrics.json",
         repaired_answers=data_dir / "results" / "repaired_answers.json",
+        repair_verification=data_dir / "results" / "repair_verification.json",
         comparison_report=data_dir / "reports" / "corruption_report.md",
     )
 

@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-09-25T10:03:40.380521+00:00",
+  "repair_source": "data/raw/crossref_records.json",
+  "repair_triggered_by_failed_gate": true,
+  "repair_runs_compared": 2,
+  "idempotent": true,
+  "baseline_matches_repaired": true,
+  "baseline_dataframe_sha256": "a4412bd1d472e365ec7d48403d159115459cbb7f1019a9a256950f6bc98c91e2",
+  "first_repair_dataframe_sha256": "a4412bd1d472e365ec7d48403d159115459cbb7f1019a9a256950f6bc98c91e2",
+  "second_repair_dataframe_sha256": "a4412bd1d472e365ec7d48403d159115459cbb7f1019a9a256950f6bc98c91e2",
+  "test_set_unchanged": true,
+  "test_set_sha256": "4d330a1c884b26b27cdd3af997728ab2471d6e7a8fe1e0e3465ccfe9438f8fc7"
+}
